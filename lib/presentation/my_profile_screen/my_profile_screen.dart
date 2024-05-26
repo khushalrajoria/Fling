@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:open_signup_login_page1_signup/presentation/image_gallery_screen/image_gallery_screen.dart';
+import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/app_export.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
 import '../../widgets/app_bar/appbar_subtitle.dart';
@@ -272,7 +274,12 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                   SizedBox(height: 43.v),
                   InkWell(
-                    onTap: () {NavigatorService.pushNamed(AppRoutes.loginPageScreen,);},
+                    onTap: () async{
+                      NavigatorService.pushNamed(AppRoutes.loginPageScreen,);
+                      var sharedPref = await SharedPreferences.getInstance();
+                      sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+
+                      },
                     child: RichText(
                       text: TextSpan(
                         children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/app_export.dart';
 import 'models/open_page_model.dart';
 import 'provider/open_page_provider.dart';
@@ -20,13 +21,14 @@ class OpenPageScreen extends StatefulWidget {
 }
 
 class OpenPageScreenState extends State<OpenPageScreen> {
+
+  static const String keyLogin="login";
+
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(milliseconds: 3000), () {
-      NavigatorService.popAndPushNamed(
-        AppRoutes.loginPageScreen,
-      );
+      navigateFurther();
     });
   }
 
@@ -69,5 +71,31 @@ class OpenPageScreenState extends State<OpenPageScreen> {
         ),
       ),
     );
+  }
+
+
+  void navigateFurther() async{
+
+    var sharedPref = await SharedPreferences.getInstance();
+
+    var isLoggedIn = sharedPref.getBool(keyLogin);
+
+    if(isLoggedIn==null){
+      NavigatorService.popAndPushNamed(
+        AppRoutes.loginPageScreen,
+      );
+    }else{
+      if(isLoggedIn){
+        NavigatorService.popAndPushNamed(
+          AppRoutes.homePageContainerScreen,
+        );
+      }else{
+        NavigatorService.popAndPushNamed(
+          AppRoutes.loginPageScreen,
+        );
+      }
+    }
+
+
   }
 }

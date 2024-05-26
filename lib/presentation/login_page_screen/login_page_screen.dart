@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:open_signup_login_page1_signup/config.dart';
+import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/app_export.dart';
 import '../../core/utils/validation_functions.dart';
 import '../../domain/googleauth/google_auth_helper.dart';
@@ -7,6 +12,7 @@ import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'models/login_page_model.dart';
 import 'provider/login_page_provider.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPageScreen extends StatefulWidget {
   const LoginPageScreen({Key? key})
@@ -164,7 +170,7 @@ class LoginPageScreenState extends State<LoginPageScreen> {
       buttonTextStyle: theme.textTheme.titleLarge!,
       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 31, 243, 197))),
       onPressed: (){
-        Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
+        loginButton(context);
       },
     );
   }
@@ -195,6 +201,7 @@ class LoginPageScreenState extends State<LoginPageScreen> {
   onTapSignInWithButton(BuildContext context) async {
     await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
       if (googleUser != null) {
+        Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
       } else {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('user data is empty')));
@@ -210,5 +217,43 @@ class LoginPageScreenState extends State<LoginPageScreen> {
     NavigatorService.pushNamed(
       AppRoutes.signupPageScreen,
     );
+  }
+}
+void loginButton(BuildContext context) async{
+  final provider = Provider.of<LoginPageProvider>(context, listen: false);
+  final email = provider.emailFieldController;
+  final password = provider.passwordFieldController;
+  if (email.text.isNotEmpty && password.text.isNotEmpty) {
+    var body={
+      "email":email.text,
+      "password":password.text
+    };
+
+    var response =await http.post(
+        Uri.parse(loginRoute),
+        headers: {
+          "content-type":"application/json"
+        },
+        body: jsonEncode(body));
+    var resp =jsonDecode(response.body);
+    print("Came Here 1");
+    if(resp['msg']['statusCode']==200){
+      print("Came Here 2");
+      var sharedPref=await SharedPreferences.getInstance();
+      sharedPref.setBool(OpenPageScreenState.keyLogin, true);
+      print("Final Came Here");
+      Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
+    }else if(resp['msg']['statusCode']==402){
+      print("login failure Came Here");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Incorrect Email or password')));
+    }else{
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Error Signing In, Try Again Later')));
+    }
+
+  } else {
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text('Email or Password is Null')));
   }
 }

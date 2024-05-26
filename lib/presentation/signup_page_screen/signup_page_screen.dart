@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../core/utils/validation_functions.dart';
@@ -7,6 +9,8 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import 'provider/signup_page_provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:open_signup_login_page1_signup/config.dart';
 
 class SignupPageScreen extends StatefulWidget {
   const SignupPageScreen({Key? key})
@@ -28,6 +32,7 @@ class SignupPageScreen extends StatefulWidget {
 // ignore_for_file: must_be_immutable
 class SignupPageScreenState extends State<SignupPageScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  bool agree =false;
 
   @override
   void initState() {
@@ -200,21 +205,61 @@ class SignupPageScreenState extends State<SignupPageScreen> {
           return CustomCheckboxButton(
             text: "msg_by_continuing_i".tr,
             value: continueCheckBox,
-            padding: EdgeInsets.symmetric(vertical: 1.v),
+            padding: EdgeInsets.symmetric(vertical: 0.8.v),
             onChange: (value) {
               context.read<SignupPageProvider>().changeCheckBox(value);
+              agree=true;
             },
           );
         },
       ),
     );
   }
+  void registerUser(BuildContext context) async {
+    final provider = Provider.of<SignupPageProvider>(context, listen: false);
+    final email = provider.emailFieldController;
+    final password = provider.passwordFieldController;
+
+    if (email.text.isNotEmpty && password.text.isNotEmpty) {
+      var body={
+        "email":email.text,
+        "password":password.text
+      };
+
+      var response =await http.post(
+          Uri.parse(registerRoute),
+          headers: {
+                "content-type":"application/json"
+              },
+          body: jsonEncode(body));
+      var resp =jsonDecode(response.body);
+      if(resp['msg']['statusCode']==200){
+        NavigatorService.pushNamed(
+            AppRoutes.page1SignUpScreen,
+        );
+      }else if(resp['msg']['statusCode']==409){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Email already exists, Try Sign In')));
+      }else{
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Error Registering User, Try Again Later')));
+      }
+
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Email or Password is Null')));
+    }
+  }
 
   /// Navigates to the page1SignUpScreen when the action is triggered.
   onTapRegisterButton(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.page1SignUpScreen,
-    );
+    if(agree) {
+      registerUser(context);
+    }
+    else{
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Agree to Terms and Conditions')));
+    }
   }
 
   onTapSignInWithGoogleButton(BuildContext context) async {
