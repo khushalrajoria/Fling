@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../core/app_export.dart';
 import '../../core/utils/validation_functions.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -7,10 +8,7 @@ import 'models/page_1_sign_up_model.dart';
 import 'provider/page_1_sign_up_provider.dart';
 
 class Page1SignUpScreen extends StatefulWidget {
-  const Page1SignUpScreen({Key? key})
-      : super(
-          key: key,
-        );
+  const Page1SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Page1SignUpScreenState createState() => Page1SignUpScreenState();
@@ -21,9 +19,9 @@ class Page1SignUpScreen extends StatefulWidget {
     );
   }
 }
-// ignore_for_file: must_be_immutable
 
 // ignore_for_file: must_be_immutable
+
 class Page1SignUpScreenState extends State<Page1SignUpScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -118,10 +116,26 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
     return Selector<Page1SignUpProvider, TextEditingController?>(
       selector: (context, provider) => provider.dateController,
       builder: (context, dateController, child) {
-        return CustomTextFormField(
-          controller: dateController,
-          hintText: "msg_enter_your_birth".tr,
-          borderDecoration: TextFormFieldStyleHelper.fillOnPrimaryTL12,
+        return GestureDetector(
+          onTap: () async {
+            DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            );
+            if (pickedDate != null) {
+              String formattedDate = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+              dateController?.text = formattedDate;
+            }
+          },
+          child: AbsorbPointer(
+            child: CustomTextFormField(
+              controller: dateController,
+              hintText: "msg_enter_your_birth".tr,
+              borderDecoration: TextFormFieldStyleHelper.fillOnPrimaryTL12,
+            ),
+          ),
         );
       },
     );
@@ -152,15 +166,15 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
         bottom: 51.v,
       ),
       buttonTextStyle: theme.textTheme.titleLarge!,
-        onPressed: () {
+      onPressed: () {
         onTapNextgenButton(context);
       },
     );
   }
 
-   onTapNextgenButton(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.genderDetailsScreen,
-    );
+  void onTapNextgenButton(BuildContext context) {
+    if (_formKey.currentState?.validate() ?? false) {
+      NavigatorService.pushNamed(AppRoutes.genderDetailsScreen);
+    }
   }
 }
