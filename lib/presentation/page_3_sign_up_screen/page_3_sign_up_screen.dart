@@ -287,7 +287,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
   /// Navigates to the guidelinesScreen when the action is triggered.
   onTapUploadImageButton(BuildContext context) async {
 
-    if(imageFile.toString()!=null) {
+    if(imageFile!=null) {
       var body={
         "imageFile":imageFile.toString(),
         "imageFile2":imageFile1.toString(),

@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../config.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'provider/gender_preference_provider.dart';
+import '../open_page_screen/open_page_screen.dart';
+
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
@@ -316,9 +319,9 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
       "gender":widget.gender,
       "instaId":widget.instaId,
       "snapchatId":widget.snapId,
-      "imageFile":widget.gender,
-      "imageFile2":widget.gender,
-      "imageFile3":widget.gender,
+      "imageFile":widget.imageFile.toString(),
+      "imageFile2":widget.imageFile1.toString(),
+      "imageFile3":widget.imageFile2.toString(),
       "preferredCountry":widget.selectedCountry,
       "preferredGender":"Female"
     };
@@ -328,16 +331,22 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
           "content-type":"application/json"
         },
         body: jsonEncode(body));
-    print(response);
     var resp =jsonDecode(response.body);
-    print(resp);
     // print("${widget.email}");
     // print("${widget.password}");
     // print("${widget.country}");
     // print("${widget.gender}");
     // print("${widget.imageFile}");// for checking if all the data is being entered in the last page before upload
-
-    // Navigator.of(context).popAndPushNamed(AppRoutes.homePageContainerScreen);
+    if(resp['msg']['statusCode']==200) {
+      var sharedPref = await SharedPreferences.getInstance();
+      await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
+      await sharedPref.setInt(OpenPageScreenState.uId , int.parse(resp['msg']['userId']));
+      Navigator.of(context).popAndPushNamed(AppRoutes.homePageContainerScreen);
+    }
+    else{
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Error Registring User, Kindly Contact Support')));
+    }
 
   }
   Widget _buildSignUp(BuildContext context) {

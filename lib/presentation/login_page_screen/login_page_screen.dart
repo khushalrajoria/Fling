@@ -205,6 +205,7 @@ class LoginPageScreenState extends State<LoginPageScreen> {
         if (resp['msg']['statusCode'] == 200) {
           var sharedPref = await SharedPreferences.getInstance();
           await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
+          await sharedPref.setInt(OpenPageScreenState.uId, int.parse(resp['msg']['userId']));
           Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
         } else if (resp['msg']['statusCode'] == 402) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Incorrect Email or password')));

@@ -275,9 +275,10 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   SizedBox(height: 43.v),
                   InkWell(
                     onTap: () async{
-                      NavigatorService.pushNamed(AppRoutes.loginPageScreen,);
                       var sharedPref = await SharedPreferences.getInstance();
-                      sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+                      await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+                      await sharedPref.setInt(OpenPageScreenState.uId, 0);
+                      NavigatorService.pushNamed(AppRoutes.loginPageScreen,);
 
                       },
                     child: RichText(

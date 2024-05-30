@@ -23,6 +23,7 @@ class OpenPageScreen extends StatefulWidget {
 class OpenPageScreenState extends State<OpenPageScreen> {
 
   static const String keyLogin="login";
+  static const String uId="userId";
 
   @override
   void initState() {
