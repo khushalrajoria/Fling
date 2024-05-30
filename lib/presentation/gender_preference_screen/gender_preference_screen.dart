@@ -242,6 +242,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
 }
   void _showBottomSheet(int buttonIndex) {
   final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
+  final List<String> options1 = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
 
   showModalBottomSheet(
@@ -313,7 +314,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
     print("${widget.email}");
     print("${widget.password}");
     print("${widget.country}");
-    print("${widget.gender}");
+    print("${widget.gender}"); // for checking if all the data is being entered in the last page before upload
     // var response =await http.post(
     //     Uri.parse(registerRoute), // changed from register route
     //     headers: {
