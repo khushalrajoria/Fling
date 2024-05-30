@@ -148,7 +148,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
             );
             if (pickedDate != null) {
               String formattedDate =
-                  "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
+                  "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
               dateController?.text = formattedDate;
               dateOfBirth=formattedDate;
             }

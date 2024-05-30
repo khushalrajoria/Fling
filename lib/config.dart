@@ -3,3 +3,6 @@ final url="https://3ea4-122-173-46-51.ngrok-free.app/";
 final registerRoute=url+"register";
 final loginRoute=url+"login";
 final checkUserRoute=url+"checkUser";
+final checkImageRoute=url+"checkImage";
+final checkInstaRoute=url+"checkInsta";
+final checkSnapRoute=url+"checkSnap";

@@ -1,13 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:open_signup_login_page1_signup/presentation/guidelines_screen/guidelines_screen.dart';
+import '../../config.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../guidelines_screen/provider/guidelines_provider.dart';
 import 'models/page_3_sign_up_model.dart';
 import 'provider/page_3_sign_up_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 
 class Page3SignUpScreen extends StatefulWidget {
@@ -282,30 +285,54 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
   }
 
   /// Navigates to the guidelinesScreen when the action is triggered.
-  onTapUploadImageButton(BuildContext context) {
+  onTapUploadImageButton(BuildContext context) async {
 
-    if(imageFile!=null ||imageFile1!=null ||imageFile2!=null) {
-      Navigator.of(context).push(
-         MaterialPageRoute(
-         builder: (context) => ChangeNotifierProvider<GuidelinesProvider>(
-           create: (context) => GuidelinesProvider(),
-          child: 
-              GuidelinesScreen(
-                email: widget.email,
-                password: widget.password,
-                fullName: widget.fullName,
-                dateOfBirth: widget.dateOfBirth,
-                country: widget.country,
-                gender: widget.gender,
-                snapId: widget.snapId,
-                instaId: widget.instaId,
-                imageFile: imageFile,
-                imageFile1: imageFile1,
-                imageFile2: imageFile2,
-              ),
-        ),
-         )
-      );
+    if(imageFile.toString()!=null) {
+      var body={
+        "imageFile":imageFile.toString(),
+        "imageFile2":imageFile1.toString(),
+        "imageFile3":imageFile2.toString()
+      };
+      var response =await http.post(
+          Uri.parse(checkImageRoute),
+          headers: {
+            "content-type":"application/json"
+          },
+          body: jsonEncode(body));
+      var resp =jsonDecode(response.body);
+      print(resp);
+      print(imageFile);
+      if(resp['msg']['statusCode']==200) {
+        Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) =>
+                  ChangeNotifierProvider<GuidelinesProvider>(
+                    create: (context) => GuidelinesProvider(),
+                    child:
+                    GuidelinesScreen(
+                      email: widget.email,
+                      password: widget.password,
+                      fullName: widget.fullName,
+                      dateOfBirth: widget.dateOfBirth,
+                      country: widget.country,
+                      gender: widget.gender,
+                      snapId: widget.snapId,
+                      instaId: widget.instaId,
+                      imageFile: imageFile,
+                      imageFile1: imageFile1,
+                      imageFile2: imageFile2,
+                    ),
+                  ),
+            )
+        );
+      }else if(resp['msg']['statusCode']==409){
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Image Exists In Database')));
+      }
+      else{
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(resp['msg']['msg'])));
+      }
     }
   }
 }

@@ -310,18 +310,33 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
     var body={
       "email":widget.email,
       "password":widget.password,
+      "fullName":widget.fullName,
+      "dateofBirth":widget.dateOfBirth,
+      "country":widget.country,
+      "gender":widget.gender,
+      "instaId":widget.instaId,
+      "snapchatId":widget.snapId,
+      "imageFile":widget.gender,
+      "imageFile2":widget.gender,
+      "imageFile3":widget.gender,
+      "preferredCountry":widget.selectedCountry,
+      "preferredGender":"Female"
     };
-    print("${widget.email}");
-    print("${widget.password}");
-    print("${widget.country}");
-    print("${widget.gender}"); // for checking if all the data is being entered in the last page before upload
-    // var response =await http.post(
-    //     Uri.parse(registerRoute), // changed from register route
-    //     headers: {
-    //       "content-type":"application/json"
-    //     },
-    //     body: jsonEncode(body));
-    // var resp =jsonDecode(response.body);
+    var response =await http.post(
+        Uri.parse(registerRoute),
+        headers: {
+          "content-type":"application/json"
+        },
+        body: jsonEncode(body));
+    print(response);
+    var resp =jsonDecode(response.body);
+    print(resp);
+    // print("${widget.email}");
+    // print("${widget.password}");
+    // print("${widget.country}");
+    // print("${widget.gender}");
+    // print("${widget.imageFile}");// for checking if all the data is being entered in the last page before upload
+
     // Navigator.of(context).popAndPushNamed(AppRoutes.homePageContainerScreen);
 
   }
