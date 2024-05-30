@@ -39,6 +39,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
   String? _selectedCountry;
   String? name;
   String? dateOfBirth;
+  int age=0;
   List<String> _countries = ['India','Pakistan','USA','Russia','Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada',
   'Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana',
   'Haiti','Honduras','Hungary','Iceland','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan',
@@ -146,7 +147,15 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
             );
+
             if (pickedDate != null) {
+              DateTime currentDate=DateTime.now();
+              age=currentDate.year-pickedDate.year;
+              if(pickedDate.month>=currentDate.month){
+                if(pickedDate.day>currentDate.day){
+                  age++;
+                }
+              }
               String formattedDate =
                   "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
               dateController?.text = formattedDate;
@@ -218,21 +227,26 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
           print(widget.email);
           print(widget.password);
         if(name!=null && dateOfBirth!=null && _selectedCountry!=null) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-               builder: (context) => ChangeNotifierProvider<GenderDetailsProvider>(
-              create: (context) =>
-                  GenderDetailsProvider(),
-                  child: GenderDetailsScreen(
-                    email: widget.email,
-                    password: widget.password,
-                    fullName: name!,
-                    dateOfBirth: dateOfBirth!,
-                    country: _selectedCountry!,
-                  ),
-                  ),
-            ),
-          );
+          if(age<18){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Age is Less than 18')));
+          }else {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) =>
+                    ChangeNotifierProvider<GenderDetailsProvider>(
+                      create: (context) =>
+                          GenderDetailsProvider(),
+                      child: GenderDetailsScreen(
+                        email: widget.email,
+                        password: widget.password,
+                        fullName: name!,
+                        dateOfBirth: dateOfBirth!,
+                        country: _selectedCountry!,
+                      ),
+                    ),
+              ),
+            );
+          }
         }
         }
       },
