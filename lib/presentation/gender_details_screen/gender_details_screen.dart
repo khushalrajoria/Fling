@@ -4,22 +4,44 @@ import 'package:flutter/widgets.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../gender_details_screen/provider/gender_details_provider.dart';
+import '../page_2_sign_up_screen/page_2_sign_up_screen.dart';
+import '../page_2_sign_up_screen/provider/page_2_sign_up_provider.dart';
 
 class GenderDetailsScreen extends StatefulWidget {
-  const GenderDetailsScreen({Key? key}) : super(key: key);
+  // const GenderDetailsScreen({Key? key}) : super(key: key);
 
+  final String email;
+  final String password;
+  final String fullName;
+  final String dateOfBirth;
+  final String country;
+
+  GenderDetailsScreen({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.dateOfBirth,
+    required this.country,
+  });
   @override
   GenderDetailsScreenState createState() => GenderDetailsScreenState();
 
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GenderDetailsProvider(),
-      child: GenderDetailsScreen(),
+      child: GenderDetailsScreen(
+        email: '',
+        password: '',
+        fullName: '',
+        dateOfBirth: '',
+        country: '',
+      ),
     );
   }
 }
 
 class GenderDetailsScreenState extends State<GenderDetailsScreen> {
+  final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
   int? selectedButtonIndex; 
   String _addMoreButton1Text = 'Add more About your Gender as man ';
@@ -194,11 +216,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
     );
   }
 
-  void onTapNext(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.page2SignUpScreen,
-    );
-  }
+
 
 
   void _updateAddMoreButtonText(int buttonIndex, String selectedOption) {
@@ -217,7 +235,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
   });
 }
   void _showBottomSheet(int buttonIndex) {
-  final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
+
   String? selectedOption;
 
   showModalBottomSheet(
@@ -281,4 +299,32 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
     },
   );
 }
+  void onTapNext(BuildContext context) {
+    String gender;
+    if(selectedButtonIndex==null ){
+      gender=selectedOption!;
+    }
+    else{
+      if(options[selectedButtonIndex!]=='Prefer Not to Answer'){
+        gender=selectedOption!;
+      }else {
+        gender = options[selectedButtonIndex!];
+      }
+    }
+    Navigator.of(context).push(
+      MaterialPageRoute(
+         builder: (context) => ChangeNotifierProvider<Page2SignUpProvider>(
+           create: (context) => Page2SignUpProvider(),
+          child:  Page2SignUpScreen(
+          email: widget.email,
+          password: widget.password,
+          fullName: widget.fullName,
+          dateOfBirth: widget.dateOfBirth,
+          country: widget.country,
+          gender: gender,
+        ),
+      ),
+      )
+    );
+  }
 }

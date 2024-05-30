@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:open_signup_login_page1_signup/presentation/page_3_sign_up_screen/page_3_sign_up_screen.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
+import '../page_3_sign_up_screen/provider/page_3_sign_up_provider.dart';
 import 'models/page_2_sign_up_model.dart';
 import 'provider/page_2_sign_up_provider.dart';
 
 class Page2SignUpScreen extends StatefulWidget {
-  const Page2SignUpScreen({Key? key})
-      : super(
-          key: key,
-        );
+  // const Page2SignUpScreen({Key? key})
+  //     : super(
+  //         key: key,
+  //       );
+  final String email;
+  final String password;
+  final String fullName;
+  final String dateOfBirth;
+  final String country;
+  final String gender;
 
+  Page2SignUpScreen({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.dateOfBirth,
+    required this.country,
+    required this.gender,
+  });
   @override
   Page2SignUpScreenState createState() => Page2SignUpScreenState();
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => Page2SignUpProvider(),
-      child: Page2SignUpScreen(),
+      child: Page2SignUpScreen(
+        email: '',
+        password: '',
+        fullName: '',
+        dateOfBirth: '',
+        country: '',
+        gender: '',
+      ),
     );
   }
 }
@@ -112,8 +135,27 @@ class Page2SignUpScreenState extends State<Page2SignUpScreen> {
 
   /// Navigates to the page3SignUpScreen when the action is triggered.
   onTapNextButton(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.page3SignUpScreen,
-    );
+    final provider = Provider.of<Page2SignUpProvider>(context, listen: false);
+    final instaId = provider.instagramidoneController;
+    final snapId = provider.snapchatidoneController;
+    if(instaId.text.isNotEmpty||snapId.text.isNotEmpty) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+         builder: (context) => ChangeNotifierProvider<Page3SignUpProvider>(
+           create: (context) => Page3SignUpProvider(),
+           child: Page3SignUpScreen(
+            email: widget.email,
+            password: widget.password,
+            fullName: widget.fullName,
+            dateOfBirth: widget.dateOfBirth,
+            country: widget.country,
+            gender: widget.gender,
+            instaId: instaId.text,
+            snapId: snapId.text
+           ),
+          ),
+        ),
+      );
+    }
   }
 }

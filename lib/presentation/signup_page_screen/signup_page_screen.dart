@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import '../../core/app_export.dart';
 import '../../core/utils/validation_functions.dart';
@@ -8,6 +7,8 @@ import '../../widgets/custom_checkbox_button.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_text_form_field.dart';
+import '../page_1_sign_up_screen/page_1_sign_up_screen.dart';
+import '../page_1_sign_up_screen/provider/page_1_sign_up_provider.dart';
 import 'provider/signup_page_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_signup_login_page1_signup/config.dart';
@@ -223,20 +224,29 @@ class SignupPageScreenState extends State<SignupPageScreen> {
     if (email.text.isNotEmpty && password.text.isNotEmpty) {
       var body={
         "email":email.text,
-        "password":password.text
       };
 
       var response =await http.post(
-          Uri.parse(registerRoute),
+          Uri.parse(checkUserRoute),
           headers: {
                 "content-type":"application/json"
               },
           body: jsonEncode(body));
       var resp =jsonDecode(response.body);
       if(resp['msg']['statusCode']==200){
-        NavigatorService.pushNamed(
-            AppRoutes.page1SignUpScreen,
-        );
+        Navigator.of(context).push(
+  MaterialPageRoute(
+    builder: (context) => ChangeNotifierProvider<Page1SignUpProvider>(
+      create: (context) => Page1SignUpProvider(),
+      child: Page1SignUpScreen(
+        email: email.text,
+        password: password.text,
+      ),
+    ),
+  ),
+);
+
+
       }else if(resp['msg']['statusCode']==409){
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text('Email already exists, Try Sign In')));

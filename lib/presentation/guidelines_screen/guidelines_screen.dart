@@ -3,21 +3,60 @@ import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../country_preference_screen/country_preference_screen.dart';
-import 'models/guidelines_model.dart';
+import '../country_preference_screen/provider/country_preference_provider.dart';
 import 'provider/guidelines_provider.dart';
+import 'dart:io';
 
 class GuidelinesScreen extends StatefulWidget {
-  const GuidelinesScreen({Key? key})
-      : super(
-          key: key,
-        );
+  // const GuidelinesScreen({Key? key})
+  //     : super(
+  //         key: key,
+  //       );
+
+  final String email;
+  final String password;
+  final String fullName;
+  final String dateOfBirth;
+  final String country;
+  final String gender;
+  final String snapId;
+  final String instaId;
+  final File? imageFile;
+  final File? imageFile1;
+  final File? imageFile2;
+
+  GuidelinesScreen({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.dateOfBirth,
+    required this.country,
+    required this.gender,
+    required this.snapId,
+    required this.instaId,
+    required this.imageFile,
+    required this.imageFile1,
+    required this.imageFile2,
+  });
 
   @override
   GuidelinesScreenState createState() => GuidelinesScreenState();
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GuidelinesProvider(),
-      child: GuidelinesScreen(),
+      child: GuidelinesScreen(
+        email: '',
+        password: '',
+        fullName: '',
+        dateOfBirth: '',
+        country: '',
+        gender: '',
+        snapId: '',
+        instaId: '',
+        imageFile1: null,
+        imageFile2: null,
+        imageFile: null,
+      ),
     );
   }
 }
@@ -101,10 +140,25 @@ class GuidelinesScreenState extends State<GuidelinesScreen> {
     // NavigatorService.pushNamed(
     //   AppRoutes.genderPreferenceScreen,
     // );
-    Navigator.push(
-  context,
-  MaterialPageRoute(builder: (context) => CountryPreferenceScreen()),
-);
+    Navigator.of(context).push(
+      MaterialPageRoute(
+         builder: (context) => ChangeNotifierProvider<CountryPreferenceProvider>(
+           create: (context) => CountryPreferenceProvider(),
+        child: CountryPreferenceScreen(
+              email: widget.email,
+              password: widget.password,
+              fullName: widget.fullName,
+              dateOfBirth: widget.dateOfBirth,
+              country: widget.country,
+              gender: widget.gender,
+              snapId: widget.snapId,
+              instaId: widget.instaId,
+              imageFile: widget.imageFile,
+              imageFile1: widget.imageFile1,
+              imageFile2: widget.imageFile2,
+            ),
+      ),)
+    );
   }
 
 }

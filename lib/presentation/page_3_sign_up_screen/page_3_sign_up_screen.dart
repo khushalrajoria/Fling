@@ -1,30 +1,63 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:open_signup_login_page1_signup/presentation/guidelines_screen/guidelines_screen.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../guidelines_screen/provider/guidelines_provider.dart';
 import 'models/page_3_sign_up_model.dart';
 import 'provider/page_3_sign_up_provider.dart';
 import 'package:image_picker/image_picker.dart';
 
 
 class Page3SignUpScreen extends StatefulWidget {
-  const Page3SignUpScreen({Key? key})
-      : super(
-          key: key,
-        );
+  // const Page3SignUpScreen({Key? key})
+  //     : super(
+  //         key: key,
+  //       );
+  final String email;
+  final String password;
+  final String fullName;
+  final String dateOfBirth;
+  final String country;
+  final String gender;
+  final String snapId;
+  final String instaId;
 
+  Page3SignUpScreen({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.dateOfBirth,
+    required this.country,
+    required this.snapId,
+    required this.instaId,
+    required this.gender,
+
+  });
   @override
   Page3SignUpScreenState createState() => Page3SignUpScreenState();
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => Page3SignUpProvider(),
-      child: Page3SignUpScreen(),
+      child: Page3SignUpScreen(
+        email: '',
+        password: '',
+        fullName: '',
+        dateOfBirth: '',
+        country: '',
+        snapId: '',
+        instaId: '',
+        gender: '',
+      ),
     );
   }
 }
 
 class Page3SignUpScreenState extends State<Page3SignUpScreen> {
+  File? imageFile;
+  File? imageFile1;
+  File? imageFile2;
   @override
   void initState() {
     super.initState();
@@ -100,6 +133,9 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
       final imageProvider = ValueNotifier<ImageProvider?>(null);
       final imageProvider1 = ValueNotifier<ImageProvider?>(null);
       final imageProvider2 = ValueNotifier<ImageProvider?>(null);
+
+
+
   return Align(
     alignment: Alignment.centerRight,
     child: Padding(
@@ -116,6 +152,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
 
               // Update image provider with selected image
               imageProvider.value = FileImage(File(image.path));
+              imageFile=File(image.path);
             },
             child: Container(
               height: 357.v,
@@ -150,6 +187,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
 
               // Update image provider with selected image
               imageProvider1.value = FileImage(File(image.path));
+              imageFile1=File(image.path);
             },
             child: Container(
               height: 357.v,
@@ -184,6 +222,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
 
               // Update image provider with selected image
               imageProvider2.value = FileImage(File(image.path));
+              imageFile2=File(image.path);
             },
             child: Container(
               height: 357.v,
@@ -244,8 +283,29 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
 
   /// Navigates to the guidelinesScreen when the action is triggered.
   onTapUploadImageButton(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.guidelinesScreen,
-    );
+
+    if(imageFile!=null ||imageFile1!=null ||imageFile2!=null) {
+      Navigator.of(context).push(
+         MaterialPageRoute(
+         builder: (context) => ChangeNotifierProvider<GuidelinesProvider>(
+           create: (context) => GuidelinesProvider(),
+          child: 
+              GuidelinesScreen(
+                email: widget.email,
+                password: widget.password,
+                fullName: widget.fullName,
+                dateOfBirth: widget.dateOfBirth,
+                country: widget.country,
+                gender: widget.gender,
+                snapId: widget.snapId,
+                instaId: widget.instaId,
+                imageFile: imageFile,
+                imageFile1: imageFile1,
+                imageFile2: imageFile2,
+              ),
+        ),
+         )
+      );
+    }
   }
 }

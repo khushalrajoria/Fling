@@ -1,21 +1,61 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import '../../config.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_text_form_field.dart';
 import 'provider/gender_preference_provider.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class GenderPreferenceScreen extends StatefulWidget {
-  const GenderPreferenceScreen({Key? key})
-      : super(
-          key: key,
-        );
+  final String email;
+  final String password;
+  final String fullName;
+  final String dateOfBirth;
+  final String country;
+  final String gender;
+  final String snapId;
+  final String instaId;
+  final File? imageFile;
+  final File? imageFile1;
+  final File? imageFile2;
+  final String selectedCountry;
+
+  GenderPreferenceScreen({
+    required this.email,
+    required this.password,
+    required this.fullName,
+    required this.dateOfBirth,
+    required this.country,
+    required this.gender,
+    required this.snapId,
+    required this.instaId,
+    required this.imageFile,
+    required this.imageFile1,
+    required this.imageFile2,
+    required this.selectedCountry,
+  });
 
   @override
   GenderPreferenceScreenState createState() => GenderPreferenceScreenState();
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GenderPreferenceProvider(),
-      child: GenderPreferenceScreen(),
+      child: GenderPreferenceScreen(
+        email: '',
+        password: '',
+        fullName: '',
+        dateOfBirth: '',
+        country: '',
+        gender: '',
+        snapId: '',
+        instaId: '',
+        imageFile1: null,
+        imageFile2: null,
+        imageFile: null,
+        selectedCountry: '',
+      ),
     );
   }
 }
@@ -24,7 +64,7 @@ class GenderPreferenceScreenState extends State<GenderPreferenceScreen> {
   @override
 
   String? selectedOption;
-  int? selectedButtonIndex; 
+  int? selectedButtonIndex;
   String _addMoreButton1Text = 'Add more About your Prefrence ';
 String _addMoreButton2Text = 'Add more About your Prefrence ';
 String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index of the selected button
@@ -101,7 +141,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 1
                       ? Colors.green
-                      : null, 
+                      : null,
                       minimumSize: Size(360, 69)
                 ),
               ),
@@ -137,7 +177,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 2
                       ? Colors.green
-                      : null, 
+                      : null,
                       minimumSize: Size(360, 69)
                 ),
               ),
@@ -265,7 +305,25 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
     },
   );
 }
-}
+  onTapNextButton(BuildContext context) async{
+    var body={
+      "email":widget.email,
+      "password":widget.password,
+    };
+    print("${widget.email}");
+    print("${widget.password}");
+    print("${widget.country}");
+    print("${widget.gender}");
+    // var response =await http.post(
+    //     Uri.parse(registerRoute), // changed from register route
+    //     headers: {
+    //       "content-type":"application/json"
+    //     },
+    //     body: jsonEncode(body));
+    // var resp =jsonDecode(response.body);
+    // Navigator.of(context).popAndPushNamed(AppRoutes.homePageContainerScreen);
+
+  }
   Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_sign_up".tr,
@@ -275,7 +333,13 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
         bottom: 57.v,
       ),
       onPressed: (){
-        Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
+        onTapNextButton(context);
+
       },
     );
   }
+
+}
+
+
+
