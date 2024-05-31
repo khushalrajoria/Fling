@@ -299,12 +299,17 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   );
 }
   onTapNextButton(BuildContext context) async{
+    var bytes2, base64image2,bytes3,base64image3;
       final bytes = await widget.imageFile!.readAsBytes();
       final base64image =base64Encode(bytes);
-      final bytes2 = await widget.imageFile1!.readAsBytes();
-      final base64image2 =base64Encode(bytes2);
-      final bytes3 = await widget.imageFile2!.readAsBytes();
-      final base64image3 =base64Encode(bytes3);
+      if(widget.imageFile1!=null) {
+        bytes2 = await widget.imageFile1!.readAsBytes();
+        base64image2 = base64Encode(bytes2);
+      }
+      if(widget.imageFile2!=null) {
+        bytes3 = await widget.imageFile2!.readAsBytes();
+        base64image3 = base64Encode(bytes3);
+      }
     var body={
       "email":widget.email,
       "password":widget.password,
@@ -327,13 +332,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
         },
         body: jsonEncode(body));
     var resp =jsonDecode(response.body);
-    print(resp);
-    // print("${widget.email}");
-    // print("${widget.password}");
-    // print("${widget.country}");
-    // print("${widget.gender}");
-    // print("${widget.imageFile}");// for checking if all the data is being entered in the last page before upload
-    if(resp['msg']['statusCode']==200) {
+     if(resp['msg']['statusCode']==200) {
       var sharedPref = await SharedPreferences.getInstance();
       await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
       await sharedPref.setInt(OpenPageScreenState.uId , int.parse(resp['msg']['userId']));
@@ -361,6 +360,3 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   }
 
 }
-
-
-

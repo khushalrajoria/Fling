@@ -19,6 +19,7 @@ class GuidelinesScreen extends StatefulWidget {
   final String dateOfBirth;
   final String country;
   final String gender;
+  final String maingender;
   final String snapId;
   final String instaId;
   final File? imageFile;
@@ -31,6 +32,7 @@ class GuidelinesScreen extends StatefulWidget {
     required this.fullName,
     required this.dateOfBirth,
     required this.country,
+    required this.maingender,
     required this.gender,
     required this.snapId,
     required this.instaId,
@@ -50,6 +52,7 @@ class GuidelinesScreen extends StatefulWidget {
         fullName: '',
         dateOfBirth: '',
         country: '',
+        maingender: '', // ____________________________________- yahi tak kiya hai gender wala mai so raha kyunki server dowm me sleep
         gender: '',
         snapId: '',
         instaId: '',

@@ -22,6 +22,7 @@ class Page2SignUpScreen extends StatefulWidget {
   final String dateOfBirth;
   final String country;
   final String gender;
+  final String maingender;
 
   Page2SignUpScreen({
     required this.email,
@@ -30,6 +31,7 @@ class Page2SignUpScreen extends StatefulWidget {
     required this.dateOfBirth,
     required this.country,
     required this.gender,
+    required this.maingender,
   });
   @override
   Page2SignUpScreenState createState() => Page2SignUpScreenState();
@@ -43,6 +45,7 @@ class Page2SignUpScreen extends StatefulWidget {
         dateOfBirth: '',
         country: '',
         gender: '',
+        maingender: '', // iske aage changes nhi kiya ahhi tak
       ),
     );
   }
@@ -202,6 +205,7 @@ class Page2SignUpScreenState extends State<Page2SignUpScreen> {
                   dateOfBirth: widget.dateOfBirth,
                   country: widget.country,
                   gender: widget.gender,
+                  maingender: widget.maingender,
                   instaId: instaId.text,
                   snapId: snapId.text
               ),

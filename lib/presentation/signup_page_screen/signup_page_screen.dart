@@ -73,8 +73,6 @@ class SignupPageScreenState extends State<SignupPageScreen> {
                     Spacer(),
                     _buildRegisterButton(context),
                     SizedBox(height: 19.v),
-                    _buildSignInWithGoogleButton(context),
-                    SizedBox(height: 19.v),
                     _buildExistingUserLoginButton(context),
                     SizedBox(height: 10.v),
                     _buildContinueCheckBox(context)
@@ -158,28 +156,7 @@ class SignupPageScreenState extends State<SignupPageScreen> {
     );
   }
 
-  /// Section Widget
-  Widget _buildSignInWithGoogleButton(BuildContext context) {
-    return CustomOutlinedButton(
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.white)),
-      text: "msg_sign_in_with_google".tr,
-      margin: EdgeInsets.only(
-        left: 5.h,
-        right: 6.h,
-      ),
-      leftIcon: Container(
-        margin: EdgeInsets.only(right: 30.h),
-        child: CustomImageView(
-          imagePath: ImageConstant.imgGoogle,
-          height: 24.adaptSize,
-          width: 24.adaptSize,
-        ),
-      ),
-      onPressed: () {
-        onTapSignInWithGoogleButton(context);
-      },
-    );
-  }
+
 
   /// Section Widget
   Widget _buildExistingUserLoginButton(BuildContext context) {

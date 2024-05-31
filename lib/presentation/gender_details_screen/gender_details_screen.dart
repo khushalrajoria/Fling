@@ -43,7 +43,9 @@ class GenderDetailsScreen extends StatefulWidget {
 class GenderDetailsScreenState extends State<GenderDetailsScreen> {
   final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
+  // String selectedOption1='';
   int? selectedButtonIndex; 
+  String maingender=''; 
   String _addMoreButton1Text = 'Add more About your Gender as man ';
 String _addMoreButton2Text = 'Add more About your Gender as Woman';
 String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track the index of the selected button
@@ -76,7 +78,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(0); // Button index 0
+                  _handleButtonPress(0,'Man'); 
                 },
                 child: Text(
                   "Man",
@@ -110,11 +112,10 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(1); // Button index 1
+                  _handleButtonPress(1,'Woman'); // Button index 1
                 },
                 child: Text(
                   "Woman",
-                  // style: TextStyle(color: Colors.white,fontSize: 24),
                   style: theme.textTheme.titleLarge!,
                 ),
                 style: ElevatedButton.styleFrom(
@@ -147,7 +148,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(2); // Button index 2
+                  _handleButtonPress(2,'Non Binary'); // Button index 2
                 },
                 child: Text(
                   "Non Binary ",
@@ -189,14 +190,15 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
     );
   }
 
-  void _handleButtonPress(int buttonIndex) {
+  void _handleButtonPress(int buttonIndex,String biggender) {
     setState(() {
       if (selectedButtonIndex == buttonIndex) {
-        // If the same button is clicked again, deselect it
+      
         selectedButtonIndex = null;
       } else {
         // If a different button is clicked, deselect the previous one and select the new one
         selectedButtonIndex = buttonIndex;
+        maingender =biggender;
       }
     });
   }
@@ -300,17 +302,23 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
   );
 }
   void onTapNext(BuildContext context) {
+    String Biggender;
     String gender;
     if(selectedButtonIndex==null ){
       gender=selectedOption!;
+      Biggender=maingender;
     }
     else{
       if(options[selectedButtonIndex!]=='Prefer Not to Answer'){
         gender=selectedOption!;
+         Biggender=maingender;
       }else {
         gender = options[selectedButtonIndex!];
+          Biggender=maingender;
       }
     }
+    print(Biggender);
+    print(gender);
     Navigator.of(context).push(
       MaterialPageRoute(
          builder: (context) => ChangeNotifierProvider<Page2SignUpProvider>(
@@ -322,6 +330,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
           dateOfBirth: widget.dateOfBirth,
           country: widget.country,
           gender: gender,
+          maingender:Biggender,
         ),
       ),
       )

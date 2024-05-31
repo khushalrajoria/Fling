@@ -41,7 +41,7 @@ class CountryPreferenceScreen extends StatefulWidget {
 
 class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
 
-  String countryValue = "";
+  String? countryValue='country';
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,6 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child:  CSCPicker(
-                  layout: Layout.vertical,
                   showStates: false,
                   flagState: CountryFlag.ENABLE,
                   dropdownDecoration: BoxDecoration(
@@ -86,7 +85,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
                       border:
                           Border.all(color: Colors.grey.shade300, width: 1)),
                             countrySearchPlaceholder: "Country",
-                  countryDropdownLabel: "Country",
+                  countryDropdownLabel: "$countryValue",
 
                   selectedItemStyle: TextStyle(
                     color: Colors.black,
@@ -128,7 +127,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
         bottom: 57.v,
       ),
       onPressed: (){
-        if (countryValue != null) {
+        if (countryValue != 'country') {
                   // Navigator.of(context).pushNamed(AppRoutes.genderPreferenceScreen);
                 onTapNextButton(context);
 
@@ -164,7 +163,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
               imageFile: widget.imageFile,
               imageFile1: widget.imageFile1,
               imageFile2: widget.imageFile2,
-              selectedCountry: countryValue,
+              selectedCountry: countryValue!,
            )  ),
       ),
     );

@@ -24,6 +24,7 @@ class Page3SignUpScreen extends StatefulWidget {
   final String dateOfBirth;
   final String country;
   final String gender;
+  final String maingender;
   final String snapId;
   final String instaId;
 
@@ -36,6 +37,7 @@ class Page3SignUpScreen extends StatefulWidget {
     required this.snapId,
     required this.instaId,
     required this.gender,
+    required this.maingender,
 
   });
   @override
@@ -52,6 +54,7 @@ class Page3SignUpScreen extends StatefulWidget {
         snapId: '',
         instaId: '',
         gender: '',
+        maingender: '',
       ),
     );
   }
@@ -90,46 +93,6 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
     );
   }
 
-  /// Section Widget
-  // Widget _buildUploadImageRow(BuildContext context) {
-  //   return Align(
-  //     alignment: Alignment.centerRight,
-  //     child: Padding(
-  //       padding: EdgeInsets.only(left: 31.h),
-  //       child: SingleChildScrollView(
-  //         scrollDirection: Axis.horizontal,
-  //         child: Row(
-  //           mainAxisAlignment: MainAxisAlignment.end,
-  //           children: [
-  //             Container(
-  //               height: 357.v,
-  //               width: 297.h,
-  //               decoration: BoxDecoration(
-  //                 color: appTheme.blue50,
-  //               ),
-  //             ),
-  //             Container(
-  //               height: 357.v,
-  //               width: 297.h,
-  //               margin: EdgeInsets.only(left: 13.h),
-  //               decoration: BoxDecoration(
-  //                 color: appTheme.gray600,
-  //               ),
-  //             ),
-  //             Container(
-  //               height: 357.v,
-  //               width: 297.h,
-  //               margin: EdgeInsets.only(left: 13.h),
-  //               decoration: BoxDecoration(
-  //                 color: appTheme.gray600,
-  //               ),
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 
 
   Widget _buildMyImageRow(BuildContext context) {
@@ -302,6 +265,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
                       dateOfBirth: widget.dateOfBirth,
                       country: widget.country,
                       gender: widget.gender,
+                      maingender: widget.maingender,
                       snapId: widget.snapId,
                       instaId: widget.instaId,
                       imageFile: imageFile,

@@ -9,9 +9,6 @@ import '../gender_details_screen/provider/gender_details_provider.dart';
 import 'provider/page_1_sign_up_provider.dart';
 
 class Page1SignUpScreen extends StatefulWidget {
-  // const Page1SignUpScreen({Key? key}) : super(key: key);
-
-
   final String email;
   final String password;
 
@@ -19,29 +16,21 @@ class Page1SignUpScreen extends StatefulWidget {
 
   @override
   Page1SignUpScreenState createState() => Page1SignUpScreenState();
+
   static Widget builder(BuildContext context,) {
     return ChangeNotifierProvider(
       create: (context) => Page1SignUpProvider(),
       child: Page1SignUpScreen(email: '', password: ''),
     );
   }
-  // static Widget builder(BuildContext context,String email, String password) {
-  //   return ChangeNotifierProvider(
-  //     create: (context) => Page1SignUpProvider(),
-  //     child: Page1SignUpScreen(email: email, password: password),
-  //   );
-  // }
 }
-
-// ignore_for_file: must_be_immutable
 
 class Page1SignUpScreenState extends State<Page1SignUpScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  // String? _selectedCountry;
-   String countryValue = "";
+  String? _countryValue ='country';
   String? name;
   String? dateOfBirth;
-  int age=0;
+  int age = 0;
 
   @override
   void initState() {
@@ -109,7 +98,6 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
     );
   }
 
-  /// Section Widget
   Widget _buildFullName(BuildContext context) {
     return Selector<Page1SignUpProvider, TextEditingController?>(
       selector: (context, provider) => provider.fullNameController,
@@ -121,7 +109,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
             if (!isText(value)) {
               return "err_msg_please_enter_valid_text".tr;
             }
-            name=value;
+            name = value;
             return null;
           },
           borderDecoration: TextFormFieldStyleHelper.fillOnPrimaryTL12,
@@ -130,7 +118,6 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
     );
   }
 
-  /// Section Widget
   Widget _buildDate(BuildContext context) {
     return Selector<Page1SignUpProvider, TextEditingController?>(
       selector: (context, provider) => provider.dateController,
@@ -145,19 +132,18 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
             );
 
             if (pickedDate != null) {
-              DateTime currentDate=DateTime.now();
-              age=currentDate.year-pickedDate.year;
-              if(pickedDate.month>=currentDate.month){
-                if(pickedDate.day>currentDate.day){
+              DateTime currentDate = DateTime.now();
+              age = currentDate.year - pickedDate.year;
+              if (pickedDate.month >= currentDate.month) {
+                if (pickedDate.day > currentDate.day) {
                   age++;
                 }
               }
               String formattedDate =
                   "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
               dateController?.text = formattedDate;
-              dateOfBirth=formattedDate;
+              dateOfBirth = formattedDate;
             }
-
           },
           child: AbsorbPointer(
             child: CustomTextFormField(
@@ -171,47 +157,39 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
     );
   }
 
-  /// Section Widget
   Widget _buildCountry(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: CSCPicker(
-                  layout: Layout.vertical,
-                  showStates: false,
-                  flagState: CountryFlag.ENABLE,
-                  dropdownDecoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                      color: Colors.white,
-                      border:
-                          Border.all(color: Colors.grey.shade300, width: 1)),
-                            countrySearchPlaceholder: "Country",
-                  countryDropdownLabel: "Country",
-
-                  selectedItemStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-                  dropdownHeadingStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),
-                  dropdownItemStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                  ),
-
-                  dropdownDialogRadius: 10.0,
-                  searchBarRadius: 10.0,
-                  onCountryChanged: (value) {
-                    setState(() {
-                      countryValue = value;
-                    });
-                  },
-              )
+        showStates: false,
+        flagState: CountryFlag.ENABLE,
+        dropdownDecoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.white,
+          border: Border.all(color: Colors.grey.shade300, width: 1),
+        ),
+        countrySearchPlaceholder: "Country",
+        countryDropdownLabel: "$_countryValue",
+        dropdownHeadingStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 17,
+          fontWeight: FontWeight.bold,
+        ),
+        dropdownItemStyle: TextStyle(
+          color: Colors.black,
+          fontSize: 14,
+        ),
+        dropdownDialogRadius: 10.0,
+        searchBarRadius: 10.0,
+        onCountryChanged: (value) {
+          setState(() {
+            _countryValue = value;
+          });
+        },
+      ),
     );
   }
 
-  /// Section Widget
   Widget _buildNext(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_next".tr,
@@ -223,33 +201,29 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
       buttonTextStyle: theme.textTheme.titleLarge!,
       onPressed: () {
         if (_formKey.currentState?.validate() ?? false) {
-          print(widget.email);
-          print(widget.password);
-        if(name!=null && dateOfBirth!=null && countryValue!=null) {
-          if(age<18){
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Age is Less than 18')));
-          }else {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    ChangeNotifierProvider<GenderDetailsProvider>(
-                      create: (context) =>
-                          GenderDetailsProvider(),
-                      child: GenderDetailsScreen(
-                        email: widget.email,
-                        password: widget.password,
-                        fullName: name!,
-                        dateOfBirth: dateOfBirth!,
-                        country: countryValue,
+          if (name != null && dateOfBirth != null && _countryValue != null) {
+            if (age < 18) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Age is Less than 18')));
+            } else {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ChangeNotifierProvider<GenderDetailsProvider>(
+                        create: (context) => GenderDetailsProvider(),
+                        child: GenderDetailsScreen(
+                          email: widget.email,
+                          password: widget.password,
+                          fullName: name!,
+                          dateOfBirth: dateOfBirth!,
+                          country: _countryValue!,
+                        ),
                       ),
-                    ),
-              ),
-            );
+                )
+              );
+            }
           }
-        }
         }
       },
     );
   }
-
 }
