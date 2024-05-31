@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
-import '../presentation/country_preference_screen/country_preference_screen.dart';
+
 import '../presentation/friends_list_tab_container_screen/friends_list_tab_container_screen.dart';
 // import '../presentation/gender_details_screen/gender_details_screen.dart';
 import '../presentation/gender_details_screen/gender_details_screen.dart';
@@ -88,10 +88,7 @@ class AppRoutes {
         myImageGalleryScreen: MyImageGalleryScreen.builder,
         imageGalleryScreen: ImageGalleryScreen.builder,
         purchaseDrawerScreen: PurchaseDrawerScreen.builder,
-        // countryPreferenceScreen: CountryPreferenceScreen.builder,
-        // editprofilescreen :EditProfileScreen.builder,
         genderPreferenceScreen: GenderPreferenceScreen.builder,
-        // countryPreferenceScreen:CountryPreferenceScreen.builder,
         appNavigationScreen: AppNavigationScreen.builder,
         userProfileScreen: UserProfileScreen.builder,
         initialRoute: OpenPageScreen.builder,

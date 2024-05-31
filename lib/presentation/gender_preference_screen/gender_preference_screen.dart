@@ -245,7 +245,6 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
 }
   void _showBottomSheet(int buttonIndex) {
   final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
-  final List<String> options1 = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
 
   showModalBottomSheet(
@@ -294,17 +293,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                                 ),
                               ),
                               SizedBox(height: 5,),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+                            ],   ),   ),  ); },  ), ), ], ),  );   },
       );
     },
   );

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:open_signup_login_page1_signup/presentation/gender_preference_screen/gender_preference_screen.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
@@ -40,17 +40,8 @@ class CountryPreferenceScreen extends StatefulWidget {
 }
 
 class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
-  String? _selectedCountry;
-  List<String> _countries = [
-    'Everywhere',
-   'India',
-  'Pakistan',
-  'USA','Russia','Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda','Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain','Bangladesh','Barbados','Belarus','Belgium','Belize','Benin','Bhutan','Bolivia','Bosnia and Herzegovina','Botswana','Brazil','Brunei','Bulgaria','Burkina Faso','Burundi','Cabo Verde','Cambodia','Cameroon','Canada','Central African Republic','Chad','Chile','China','Colombia','Comoros','Congo','Costa Rica','Croatia','Cuba','Cyprus','Czech Republic','Denmark','Djibouti','Dominica','Dominican Republic','Ecuador','Egypt','El Salvador','Equatorial Guinea','Eritrea','Estonia','Eswatini','Ethiopia','Fiji','Finland','France','Gabon','Gambia','Georgia','Germany','Ghana','Greece','Grenada','Guatemala','Guinea','Guinea-Bissau','Guyana','Haiti','Honduras','Hungary','Iceland','Indonesia','Iran','Iraq','Ireland','Israel','Italy','Jamaica','Japan','Jordan','Kazakhstan','Kenya','Kiribati','Kosovo','Kuwait','Kyrgyzstan','Laos','Latvia','Lebanon','Lesotho','Liberia','Libya','Liechtenstein','Lithuania','Luxembourg','Madagascar','Malawi','Malaysia','Maldives','Mali','Malta','Marshall Islands','Mauritania','Mauritius','Mexico','Micronesia','Moldova','Monaco','Mongolia','Montenegro','Morocco','Mozambique','Myanmar','Namibia','Nauru','Nepal','Netherlands','New Zealand','Nicaragua','Niger','Nigeria','North Korea','North Macedonia','Norway','Oman','Palau','Palestine','Panama','Papua New Guinea','Paraguay','Peru','Philippines','Poland','Portugal','Qatar','Romania','Rwanda','Saint Kitts and Nevis','Saint Lucia','Saint Vincent and the Grenadines','Samoa','San Marino','Sao Tome and Principe','Saudi Arabia','Senegal','Serbia','Seychelles','Sierra Leone','Singapore','Slovakia','Slovenia','Solomon Islands','Somalia','South Africa','South Korea','South Sudan','Spain','Sri Lanka','Sudan','Suriname','Sweden',
-  'Switzerland',
-  'Syria','Taiwan','Tajikistan','Tanzania','Thailand','Timor-Leste','Togo','Tonga','Trinidad and Tobago','Tunisia','Turkey','Turkmenistan','Tuvalu','Uganda','Ukraine',
-  'United Arab Emirates','United Kingdom','Uruguay','Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen','Zambia','Zimbabwe',
-    
-  ];
+
+  String countryValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -85,26 +76,41 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: DropdownButton<String>(
-                  dropdownColor: Colors.black,
-                  iconSize: 40,
-                  iconEnabledColor: Colors.white,
-                  hint: Text('Select preferred country',textScaler: TextScaler.linear(1.2),style: TextStyle(color: Colors.white,),),
-                  value: _selectedCountry,
-                  isExpanded: true,
-                  onChanged: (newValue) {
+                child:  CSCPicker(
+                  layout: Layout.vertical,
+                  showStates: false,
+                  flagState: CountryFlag.ENABLE,
+                  dropdownDecoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      color: Colors.white,
+                      border:
+                          Border.all(color: Colors.grey.shade300, width: 1)),
+                            countrySearchPlaceholder: "Country",
+                  countryDropdownLabel: "Country",
+
+                  selectedItemStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+                  dropdownHeadingStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
+                  dropdownItemStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
+
+                  dropdownDialogRadius: 10.0,
+                  searchBarRadius: 10.0,
+                  onCountryChanged: (value) {
                     setState(() {
-                      _selectedCountry = newValue;});},
-                  items: _countries.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                
-                      child: Text(value,style: TextStyle(color: Colors.white,),),
-                    );
-                  }).toList(),
-                ),
+                      countryValue = value;
+                    });
+                  },
               ),
             ),
+            )
           ],
         ),
       ),
@@ -122,12 +128,9 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
         bottom: 57.v,
       ),
       onPressed: (){
-        if (_selectedCountry != null) {
+        if (countryValue != null) {
                   // Navigator.of(context).pushNamed(AppRoutes.genderPreferenceScreen);
                 onTapNextButton(context);
-
-
-
 
                 } else {
                   // Optionally show a message to select a country before proceeding
@@ -161,7 +164,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
               imageFile: widget.imageFile,
               imageFile1: widget.imageFile1,
               imageFile2: widget.imageFile2,
-              selectedCountry: _selectedCountry!,
+              selectedCountry: countryValue,
            )  ),
       ),
     );

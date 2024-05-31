@@ -15,6 +15,7 @@ dependencies:
   purchases_flutter: ^6.29.0
   shared_preferences: ^2.2.3
   connectivity_plus: ^5.0.2
+  csc_picker: ^0.2.7
   google_mobile_ads: ^5.1.0
   image_picker: ^1.1.0
   flutter_card_swiper: ^7.0.0
