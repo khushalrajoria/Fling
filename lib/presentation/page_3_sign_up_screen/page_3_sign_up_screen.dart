@@ -288,21 +288,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
   onTapUploadImageButton(BuildContext context) async {
 
     if(imageFile!=null) {
-      var body={
-        "imageFile":imageFile.toString(),
-        "imageFile2":imageFile1.toString(),
-        "imageFile3":imageFile2.toString()
-      };
-      var response =await http.post(
-          Uri.parse(checkImageRoute),
-          headers: {
-            "content-type":"application/json"
-          },
-          body: jsonEncode(body));
-      var resp =jsonDecode(response.body);
-      print(resp);
-      print(imageFile);
-      if(resp['msg']['statusCode']==200) {
+
         Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) =>
@@ -325,14 +311,6 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
                   ),
             )
         );
-      }else if(resp['msg']['statusCode']==409){
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Image Exists In Database')));
-      }
-      else{
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(resp['msg']['msg'])));
-      }
     }
   }
 }

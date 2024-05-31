@@ -310,6 +310,12 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   );
 }
   onTapNextButton(BuildContext context) async{
+      final bytes = await widget.imageFile!.readAsBytes();
+      final base64image =base64Encode(bytes);
+      final bytes2 = await widget.imageFile1!.readAsBytes();
+      final base64image2 =base64Encode(bytes2);
+      final bytes3 = await widget.imageFile2!.readAsBytes();
+      final base64image3 =base64Encode(bytes3);
     var body={
       "email":widget.email,
       "password":widget.password,
@@ -319,9 +325,9 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
       "gender":widget.gender,
       "instaId":widget.instaId,
       "snapchatId":widget.snapId,
-      "imageFile":widget.imageFile.toString(),
-      "imageFile2":widget.imageFile1.toString(),
-      "imageFile3":widget.imageFile2.toString(),
+      "imageFile":base64image,
+      "imageFile2":base64image2,
+      "imageFile3":base64image3,
       "preferredCountry":widget.selectedCountry,
       "preferredGender":"Female"
     };
@@ -332,6 +338,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
         },
         body: jsonEncode(body));
     var resp =jsonDecode(response.body);
+    print(resp);
     // print("${widget.email}");
     // print("${widget.password}");
     // print("${widget.country}");
