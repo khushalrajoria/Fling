@@ -77,7 +77,7 @@ class MyProfileModel {
   factory MyProfileModel.fromJson(Map<String, dynamic> json) {
     return MyProfileModel(
       name: json['fullname'] ?? '',
-      email: json['dateofbirth'] ?? '',
+      email: json['email'] ?? '',
       gender: json['gender'] ?? '',
       prefgender: json['prefgender'] ?? '',
       preferredgender: json['preferredgender'] ?? '',

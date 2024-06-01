@@ -488,6 +488,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                         },
                         child: CustomImageView(
                           imagePath: ImageConstant.imgWhatsappImage,
+                          
                           height: 110.adaptSize,
                           width: 110.adaptSize,
                           radius: BorderRadius.circular(
@@ -547,7 +548,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                     Padding(
                       padding: EdgeInsets.only(bottom: 6.v),
                       child: Text(
-                        profile.gender,
+                       " ${profile.maingender}-${profile.gender}",
                         style: theme.textTheme.titleSmall,
                       ),
                     )
@@ -568,7 +569,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                       style: theme.textTheme.titleSmall,
                     ),
                     Text(
-                      profile.dob,
+                      profile.dob.substring(0,10),
                       style: theme.textTheme.titleSmall,
                     )
                   ],
@@ -607,11 +608,11 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Gender Preference",
+                      "Preference",
                       style: theme.textTheme.titleSmall,
                     ),
                     Text(
-                      profile.genderPreference,
+                      "${profile.preferredgender}" "${profile.prefgender}",
                       style: theme.textTheme.titleSmall,
                     )
                   ],

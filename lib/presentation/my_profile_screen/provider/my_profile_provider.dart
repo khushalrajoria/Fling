@@ -118,7 +118,7 @@ class ApiService {
 
     if (response.statusCode == 200) {
       var resp = jsonDecode(response.body);
-      return MyProfileModel.fromJson(resp['msg']);
+      return MyProfileModel.fromJson(resp['msg']['msg']);
     } else {
       throw Exception('Failed to load profile with status code: ${response.statusCode}');
     }
