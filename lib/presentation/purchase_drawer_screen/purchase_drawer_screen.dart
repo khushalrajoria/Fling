@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../config.dart';
 import '../../core/app_export.dart';
 import '../../theme/custom_button_style.dart';
 import '../../widgets/app_bar/appbar_leading_image.dart';
@@ -6,7 +11,7 @@ import '../../widgets/app_bar/appbar_title.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import 'models/productcard_item_model.dart';
-import 'models/purchase_drawer_model.dart';
+import 'package:http/http.dart' as http;
 import 'provider/purchase_drawer_provider.dart';
 import 'widgets/productcard_item_widget.dart';
 
@@ -167,6 +172,24 @@ class PurchaseDrawerScreenState extends State<PurchaseDrawerScreen> {
             ),
             buttonStyle: CustomButtonStyles.fillCyan,
             buttonTextStyle: CustomTextStyles.titleSmallBlack900,
+            onPressed: () async {
+              print("Doing This");
+              var sharedPref =await SharedPreferences.getInstance();
+              var uId=sharedPref.getInt(OpenPageScreenState.uId);
+              print(uId);
+              var body={
+                "uId":uId
+              };
+              print(body);
+              var response =await http.post(
+                  Uri.parse(claimGemsRoute),
+                  headers: {
+                    "content-type":"application/json"
+                  },
+                  body: jsonEncode(body));
+              print(response);
+
+            },
           )
         ],
       ),

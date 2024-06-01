@@ -300,7 +300,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                         var sharedPref = await SharedPreferences.getInstance();
                         await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
                         await sharedPref.setInt(OpenPageScreenState.uId, 0);
-                        NavigatorService.pushNamed(AppRoutes.loginPageScreen);
+                        NavigatorService.popAndPushNamed(AppRoutes.loginPageScreen);
                       }
                     },
                     child: Container(
