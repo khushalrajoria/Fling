@@ -34,10 +34,22 @@ class ApiService  {
   Future<MyProfileModel> fetchProfile(String userId) async {
     var sharedPref =await SharedPreferences.getInstance();
     var uId=sharedPref.getInt(OpenPageScreenState.uId);
-    final response = await http.get(Uri.parse('$baseUrl/getProfile?userId=$uId'));
 
+    // User ID stored in uId variable from cache memory;
+    var body={
+      "uId":uId
+    };
+  // body goes with API to transfer data from app to node server
+
+    var response =await http.post(
+        Uri.parse(getprofileRoute),
+        headers: {
+          "content-type":"application/json"
+        },
+        body: jsonEncode(body));
+    var resp=jsonDecode(response.body);
     if (response.statusCode == 200) {
-      return MyProfileModel.fromJson(jsonDecode(response.body));
+      return MyProfileModel.fromJson(resp['msg']);
     } else {
       throw Exception('Failed to load profile');
     }

@@ -173,10 +173,8 @@ class PurchaseDrawerScreenState extends State<PurchaseDrawerScreen> {
             buttonStyle: CustomButtonStyles.fillCyan,
             buttonTextStyle: CustomTextStyles.titleSmallBlack900,
             onPressed: () async {
-              print("Doing This");
               var sharedPref =await SharedPreferences.getInstance();
               var uId=sharedPref.getInt(OpenPageScreenState.uId);
-              print(uId);
               var body={
                 "uId":uId
               };
