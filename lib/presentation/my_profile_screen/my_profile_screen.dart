@@ -379,6 +379,7 @@
 // }
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/app_export.dart';
@@ -618,6 +619,74 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 41.v),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Visibility(
+                        visible: profile.instaID!='' ? true: false,
+                        child: Container(
+                          height: 45.v,
+                          width: 44.h,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: AssetImage(
+                                ImageConstant.imgImage10,
+                              ),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          top: 14.v,
+                          bottom: 11.v,
+                        ),
+                        child: Text(
+                        " @${profile.instaID}",
+                          style: theme.textTheme.titleSmall,
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 15.v),
+                  Padding(
+                    padding: EdgeInsets.only(left: 7.h),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Visibility(
+                          visible: profile.snapID!='' ? true: false,
+                          child: Container(
+                            height: 36.v,
+                            width: 29.h,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                14.h,
+                              ),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  ImageConstant.imgImage9,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            top: 9.v,
+                            bottom: 7.v,
+                          ),
+                          child: Text(
+                           profile.snapID,
+                            style: theme.textTheme.titleSmall,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
               SizedBox(height: 43.v),
               InkWell(
                 onTap: () async {
