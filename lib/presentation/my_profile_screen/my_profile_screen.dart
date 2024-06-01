@@ -1,32 +1,32 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:open_signup_login_page1_signup/presentation/image_gallery_screen/image_gallery_screen.dart';
-import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../core/app_export.dart';
-import '../../widgets/app_bar/appbar_leading_image.dart';
-import '../../widgets/app_bar/appbar_subtitle.dart';
-import '../../widgets/app_bar/custom_app_bar.dart';
-import '../../widgets/custom_elevated_button.dart';
-import '../edit_profile_screen/edit_profile_screen.dart';
-import 'models/my_profile_model.dart';
-import 'provider/my_profile_provider.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:open_signup_login_page1_signup/presentation/image_gallery_screen/image_gallery_screen.dart';
+// import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import '../../core/app_export.dart';
+// import '../../widgets/app_bar/appbar_leading_image.dart';
+// import '../../widgets/app_bar/appbar_subtitle.dart';
+// import '../../widgets/app_bar/custom_app_bar.dart';
+// import '../../widgets/custom_elevated_button.dart';
+// import '../edit_profile_screen/edit_profile_screen.dart';
+// import 'models/my_profile_model.dart';
+// import 'provider/my_profile_provider.dart';
 
-class MyProfileScreen extends StatefulWidget {
-  const MyProfileScreen({Key? key})
-      : super(
-          key: key,
-        );
+// class MyProfileScreen extends StatefulWidget {
+//   const MyProfileScreen({Key? key})
+//       : super(
+//           key: key,
+//         );
 
-  @override
-  MyProfileScreenState createState() => MyProfileScreenState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => MyProfileProvider(),
-      child: MyProfileScreen(),
-    );
-  }
-}
+//   @override
+//   MyProfileScreenState createState() => MyProfileScreenState();
+//   static Widget builder(BuildContext context) {
+//     return ChangeNotifierProvider(
+//       create: (context) => MyProfileProvider(),
+//       child: MyProfileScreen(),
+//     );
+//   }
+// }
 
 // class MyProfileScreenState extends State<MyProfileScreen> {
 //   @override
@@ -377,14 +377,41 @@ class MyProfileScreen extends StatefulWidget {
 //     );
 //   }
 // }
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../core/app_export.dart';
+import '../../widgets/app_bar/appbar_leading_image.dart';
+import '../../widgets/app_bar/appbar_subtitle.dart';
+import '../../widgets/app_bar/custom_app_bar.dart';
+import '../../widgets/custom_elevated_button.dart';
+import '../edit_profile_screen/edit_profile_screen.dart';
+import '../image_gallery_screen/image_gallery_screen.dart';
+import '../open_page_screen/open_page_screen.dart';
+import 'models/my_profile_model.dart';
+import 'provider/my_profile_provider.dart';
 
+class MyProfileScreen extends StatefulWidget {
+  const MyProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  MyProfileScreenState createState() => MyProfileScreenState();
+
+  static Widget builder(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => MyProfileProvider(),
+      child: const MyProfileScreen(),
+    );
+  }
+}
 
 class MyProfileScreenState extends State<MyProfileScreen> {
   @override
   void initState() {
     super.initState();
-    final myProfileProvider = Provider.of<MyProfileProvider>(context, listen: false);
-    myProfileProvider.fetchProfile('USER_ID_HERE'); // Replace with the actual user ID
+    Future.microtask(() =>
+        Provider.of<MyProfileProvider>(context, listen: false).fetchProfile());
   }
 
   @override
@@ -395,7 +422,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
         body: Consumer<MyProfileProvider>(
           builder: (context, myProfileProvider, child) {
             if (myProfileProvider.isLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (myProfileProvider.errorMessage != null) {
@@ -404,7 +431,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
 
             final profile = myProfileProvider.myProfileModelObj;
             if (profile == null) {
-              return Center(child: Text('No profile data'));
+              return const Center(child: Text('No profile data'));
             }
 
             return _buildProfileContent(profile);
@@ -413,7 +440,6 @@ class MyProfileScreenState extends State<MyProfileScreen> {
       ),
     );
   }
-
   Widget _buildProfileContent(MyProfileModel profile) {
     return SizedBox(
       width: SizeUtils.width,
@@ -457,7 +483,8 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ImageGalleryScreen()));
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => ImageGalleryScreen()));
                         },
                         child: CustomImageView(
                           imagePath: ImageConstant.imgWhatsappImage,
@@ -476,7 +503,11 @@ class MyProfileScreenState extends State<MyProfileScreen> {
               SizedBox(height: 8.v),
               Text(
                 profile.name,
-                style: TextStyle(color: const Color.fromARGB(255, 31, 243, 197), fontFamily: 'Inria Sans', fontSize: 21, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: const Color.fromARGB(255, 31, 243, 197),
+                    fontFamily: 'Inria Sans',
+                    fontSize: 21,
+                    fontWeight: FontWeight.w600),
               ),
               Text(
                 profile.email,
@@ -586,7 +617,76 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   ],
                 ),
               ),
-              // Additional UI code...
+              SizedBox(height: 43.v),
+              InkWell(
+                onTap: () async {
+                  bool confirmLogout = await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: const Text('Confirm Logout'),
+                        content: const Text(
+                            'Are you sure you want to logout?'),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.of(context).pop(false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.of(context).pop(true),
+                            child: const Text('Logout'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+
+                  if (confirmLogout) {
+                    var sharedPref = await SharedPreferences.getInstance();
+                    await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+                    await sharedPref.setInt(OpenPageScreenState.uId, 0);
+                    NavigatorService.popAndPushNamed(AppRoutes.loginPageScreen);
+                  }
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.red,
+                  ),
+                  width: 161.h,
+                  child: const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Center(
+                      child: Text(
+                        "LogOut",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 6.v),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "Can't continue?",
+                      style: theme.textTheme.titleMedium,
+                    ),
+                    TextSpan(
+                      text: "delete account",
+                      style: CustomTextStyles.titleMediumcyan200_1,
+                    ),
+                  ],
+                ),
+                textAlign: TextAlign.left,
+              ),
             ],
           ),
         ),
@@ -611,13 +711,13 @@ class MyProfileScreenState extends State<MyProfileScreen> {
       ),
       actions: [
         IconButton(
-          icon: Icon(Icons.edit),
+          icon: const Icon(Icons.edit),
           onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => EditProfileScreen()));
           },
         ),
       ],
     );
   }
 }
-
