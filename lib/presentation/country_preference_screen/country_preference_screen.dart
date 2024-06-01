@@ -15,6 +15,7 @@ class CountryPreferenceScreen extends StatefulWidget {
   final String fullName;
   final String dateOfBirth;
   final String country;
+  final String maingender;
   final String gender;
   final String snapId;
   final String instaId;
@@ -28,6 +29,7 @@ class CountryPreferenceScreen extends StatefulWidget {
     required this.fullName,
     required this.dateOfBirth,
     required this.country,
+    required this.maingender,
     required this.gender,
     required this.snapId,
     required this.instaId,
@@ -158,6 +160,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
               dateOfBirth: widget.dateOfBirth,
               country: widget.country,
               gender: widget.gender,
+              maingender: widget.maingender,
               snapId: widget.snapId,
               instaId: widget.instaId,
               imageFile: widget.imageFile,

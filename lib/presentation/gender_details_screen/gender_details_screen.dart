@@ -43,7 +43,7 @@ class GenderDetailsScreen extends StatefulWidget {
 class GenderDetailsScreenState extends State<GenderDetailsScreen> {
   final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
-  // String selectedOption1='';
+  
   int? selectedButtonIndex; 
   String maingender=''; 
   String _addMoreButton1Text = 'Add more About your Gender as man ';
@@ -317,8 +317,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
           Biggender=maingender;
       }
     }
-    print(Biggender);
-    print(gender);
+  
     Navigator.of(context).push(
       MaterialPageRoute(
          builder: (context) => ChangeNotifierProvider<Page2SignUpProvider>(

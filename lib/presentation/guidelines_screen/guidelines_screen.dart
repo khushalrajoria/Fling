@@ -52,7 +52,7 @@ class GuidelinesScreen extends StatefulWidget {
         fullName: '',
         dateOfBirth: '',
         country: '',
-        maingender: '', // ____________________________________- yahi tak kiya hai gender wala mai so raha kyunki server dowm me sleep
+        maingender: '', 
         gender: '',
         snapId: '',
         instaId: '',
@@ -154,6 +154,7 @@ class GuidelinesScreenState extends State<GuidelinesScreen> {
               dateOfBirth: widget.dateOfBirth,
               country: widget.country,
               gender: widget.gender,
+              maingender: widget.maingender,
               snapId: widget.snapId,
               instaId: widget.instaId,
               imageFile: widget.imageFile,

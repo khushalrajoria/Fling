@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../config.dart';
 import '../../core/app_export.dart';
@@ -11,12 +12,14 @@ import '../open_page_screen/open_page_screen.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
+
 class GenderPreferenceScreen extends StatefulWidget {
   final String email;
   final String password;
   final String fullName;
   final String dateOfBirth;
   final String country;
+  final String maingender;
   final String gender;
   final String snapId;
   final String instaId;
@@ -31,6 +34,7 @@ class GenderPreferenceScreen extends StatefulWidget {
     required this.fullName,
     required this.dateOfBirth,
     required this.country,
+    required this.maingender,
     required this.gender,
     required this.snapId,
     required this.instaId,
@@ -52,6 +56,7 @@ class GenderPreferenceScreen extends StatefulWidget {
         dateOfBirth: '',
         country: '',
         gender: '',
+        maingender: '',
         snapId: '',
         instaId: '',
         imageFile1: null,
@@ -64,9 +69,9 @@ class GenderPreferenceScreen extends StatefulWidget {
 }
 
 class GenderPreferenceScreenState extends State<GenderPreferenceScreen> {
-  @override
-
+  String maingenderpref='';
   String? selectedOption;
+  final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary', 'Cis', 'Prefer Not to Answer'];
   int? selectedButtonIndex;
   String _addMoreButton1Text = 'Add more About your Prefrence ';
 String _addMoreButton2Text = 'Add more About your Prefrence ';
@@ -100,7 +105,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(0); // Button index 0
+                  _handleButtonPress(0,'Man'); // Button index 0
                 },
                 child: Text(
                   "Man",
@@ -134,7 +139,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(1); // Button index 1
+                  _handleButtonPress(1,'Woman'); // Button index 1
                 },
                 child: Text(
                   "Woman",
@@ -171,7 +176,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  _handleButtonPress(2); // Button index 2
+                  _handleButtonPress(2,'Non-Binary'); // Button index 2
                 },
                 child: Text(
                   "Non Binary ",
@@ -213,7 +218,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
     );
   }
 
-  void _handleButtonPress(int buttonIndex) {
+  void _handleButtonPress(int buttonIndex,String biggener) {
     setState(() {
       if (selectedButtonIndex == buttonIndex) {
         // If the same button is clicked again, deselect it
@@ -221,6 +226,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
       } else {
         // If a different button is clicked, deselect the previous one and select the new one
         selectedButtonIndex = buttonIndex;
+        maingenderpref=biggener;
       }
     });
   }
@@ -244,7 +250,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   });
 }
   void _showBottomSheet(int buttonIndex) {
-  final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
+  // final List<String> options = ['Intersex', 'Trans', 'Also Non-Binary ', 'Cis', 'Prefer Not to Answer'];
   String? selectedOption;
 
   showModalBottomSheet(
@@ -299,6 +305,21 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   );
 }
   onTapNextButton(BuildContext context) async{
+    String mainprefgen;
+    String subprefgen;
+     if(selectedButtonIndex==null ){
+      subprefgen=selectedOption!;
+      mainprefgen=maingenderpref;
+    }
+    else{
+      if(options[selectedButtonIndex!]=='Prefer Not to Answer'){
+        subprefgen=selectedOption!;
+         mainprefgen=maingenderpref;
+      }else {
+        subprefgen = options[selectedButtonIndex!];
+          mainprefgen=maingenderpref;
+      }
+    }
     var bytes2, base64image2,bytes3,base64image3;
       final bytes = await widget.imageFile!.readAsBytes();
       final base64image =base64Encode(bytes);
@@ -310,6 +331,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
         bytes3 = await widget.imageFile2!.readAsBytes();
         base64image3 = base64Encode(bytes3);
       }
+
     var body={
       "email":widget.email,
       "password":widget.password,
@@ -317,13 +339,15 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
       "dateofBirth":widget.dateOfBirth,
       "country":widget.country,
       "gender":widget.gender,
+      "maingender":widget.maingender, 
       "instaId":widget.instaId,
       "snapchatId":widget.snapId,
       "imageFile":base64image,
       "imageFile2":base64image2,
       "imageFile3":base64image3,
       "preferredCountry":widget.selectedCountry,
-      "preferredGender":"Female"
+      "preferredGender":mainprefgen,
+      "prefgender":subprefgen,
     };
     var response =await http.post(
         Uri.parse(registerRoute),

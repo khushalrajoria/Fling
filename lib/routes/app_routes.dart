@@ -16,7 +16,6 @@ import '../presentation/open_page_screen/open_page_screen.dart';
 import '../presentation/page_1_sign_up_screen/page_1_sign_up_screen.dart';
 import '../presentation/page_2_sign_up_screen/page_2_sign_up_screen.dart';
 import '../presentation/page_3_sign_up_screen/page_3_sign_up_screen.dart';
-import '../presentation/payment_method_screen.dart';
 import '../presentation/purchase_drawer_screen/purchase_drawer_screen.dart';
 import '../presentation/requests_list_tab_container_screen/requests_list_tab_container_screen.dart';
 import '../presentation/signup_page_screen/signup_page_screen.dart';

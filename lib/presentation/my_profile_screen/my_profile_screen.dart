@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:open_signup_login_page1_signup/presentation/image_gallery_screen/image_gallery_screen.dart';
 import 'package:open_signup_login_page1_signup/presentation/open_page_screen/open_page_screen.dart';
@@ -274,34 +275,71 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                   SizedBox(height: 43.v),
                   InkWell(
-                    onTap: () async{
-                      var sharedPref = await SharedPreferences.getInstance();
-                      await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
-                      await sharedPref.setInt(OpenPageScreenState.uId, 0);
-                      NavigatorService.pushNamed(AppRoutes.loginPageScreen,);
+                    onTap: () async {
+                      bool confirmLogout = await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Confirm Logout'),
+                            content: Text('Are you sure you want to logout?'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(true),
+                                child: Text('Logout'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
 
-                      },
-                    child: RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: "lbl_not_you".tr,
-                            style:  theme.textTheme.titleMedium,
-                          ),
-                          TextSpan(
-                            text: "lbl_log_out".tr,
-                            style: CustomTextStyles.titleMediumcyan200_1,
-                          )
-                        ],
+                      if (confirmLogout) {
+                        var sharedPref = await SharedPreferences.getInstance();
+                        await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+                        await sharedPref.setInt(OpenPageScreenState.uId, 0);
+                        NavigatorService.pushNamed(AppRoutes.loginPageScreen);
+                      }
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.red,
                       ),
-                      textAlign: TextAlign.left,
+                      width: 161.h,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Center(
+                          child: Text(
+                            "LogOut",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: 6.v),
-                  CustomElevatedButton(
-                    width: 181.h,
-                    text: "msg_delete_my_account".tr,
-                  )
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "Can't continue?",
+                          style: theme.textTheme.titleMedium,
+                        ),
+                        TextSpan(
+                          text: "delete account",
+                          style: CustomTextStyles.titleMediumcyan200_1,
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
                 ],
               ),
             ),
@@ -328,15 +366,13 @@ class MyProfileScreenState extends State<MyProfileScreen> {
         margin: EdgeInsets.only(left: 12.h),
       ),
       actions: [
-      IconButton(
-        icon: Icon(Icons.edit),
-        onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
-
-        },
-      ),
-    ],
+        IconButton(
+          icon: Icon(Icons.edit),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
+          },
+        ),
+      ],
     );
   }
 }
-
