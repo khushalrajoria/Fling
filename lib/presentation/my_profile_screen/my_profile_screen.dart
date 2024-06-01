@@ -9,6 +9,7 @@ import '../../widgets/app_bar/appbar_subtitle.dart';
 import '../../widgets/app_bar/custom_app_bar.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../edit_profile_screen/edit_profile_screen.dart';
+import 'models/my_profile_model.dart';
 import 'provider/my_profile_provider.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -27,10 +28,363 @@ class MyProfileScreen extends StatefulWidget {
   }
 }
 
+// class MyProfileScreenState extends State<MyProfileScreen> {
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SafeArea(
+//       child: Scaffold(
+//         appBar: _buildAppBar(context),
+//         body: SizedBox(
+//           width: SizeUtils.width,
+//           child: SingleChildScrollView(
+//             padding: EdgeInsets.only(top: 14.v),
+//             child: Container(
+//               margin: EdgeInsets.only(
+//                 left: 43.h,
+//                 right: 54.h,
+//                 bottom: 5.v,
+//               ),
+//               decoration: AppDecoration.fillGray,
+//               child: Column(
+//                 children: [
+//                   Align(
+//                     alignment: Alignment.centerRight,
+//                     child: Container(
+//                       height: 110.v,
+//                       width: 111.h,
+//                       margin: EdgeInsets.only(right: 78.h),
+//                       child: Stack(
+//                         alignment: Alignment.center,
+//                         children: [
+//                           Align(
+//                             alignment: Alignment.center,
+//                             child: Container(
+//                               height: 110.adaptSize,
+//                               width: 110.adaptSize,
+//                               decoration: BoxDecoration(
+//                                 color: appTheme.blueGray100,
+//                                 borderRadius: BorderRadius.circular(
+//                                   55.h,
+//                                 ),
+//                                 border: Border.all(
+//                                   color: appTheme.deepcyanA200,
+//                                   width: 4.h,
+//                                   strokeAlign: BorderSide.strokeAlignOutside,
+//                                 ),
+//                               ),
+//                             ),
+//                           ),
+//                           InkWell(
+//                             onTap: (){
+//                               //  Navigator.of(context).pushNamed(AppRoutes.myImageGalleryScreen);
+//                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => ImageGalleryScreen()));
+//                             },
+//                             child: CustomImageView(
+//                               imagePath: ImageConstant.imgWhatsappImage,
+//                               height: 110.adaptSize,
+//                               width: 110.adaptSize,
+//                               radius: BorderRadius.circular(
+//                                 55.h,
+//                               ),
+//                               alignment: Alignment.center,
+//                             ),
+//                           )
+//                         ],
+//                       ),
+//                     ),
+//                   ),
+//                   SizedBox(height: 8.v),
+//                   Text(
+//                     "lbl_kirtigourab".tr,
+//                     style: TextStyle(color: const Color.fromARGB(255, 31, 243, 197),fontFamily: 'Inria Sans',fontSize: 21,fontWeight: FontWeight.w600),
+
+//                   ),
+//                   Text(
+//                     "msg_kirtigourab_gmail_com".tr,
+//                     style: theme.textTheme.labelLarge,
+//                   ),
+//                   SizedBox(height: 37.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(left: 12.h),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           "lbl_name".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         ),
+//                         Text(
+//                           "lbl_kirti_gourab2".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 7.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(left: 13.h),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         Padding(
+//                           padding: EdgeInsets.only(top: 6.v),
+//                           child: Text(
+//                             "lbl_gender".tr,
+//                             style: theme.textTheme.titleSmall,
+//                           ),
+//                         ),
+//                         Padding(
+//                           padding: EdgeInsets.only(bottom: 6.v),
+//                           child: Text(
+//                             "lbl_male".tr,
+//                             style: theme.textTheme.titleSmall,
+//                           ),
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 12.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(
+//                       left: 13.h,
+//                       right: 3.h,
+//                     ),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           "lbl_dob".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         ),
+//                         Text(
+//                           "lbl_2_01_2022".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 34.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(
+//                       left: 13.h,
+//                       right: 4.h,
+//                     ),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Padding(
+//                           padding: EdgeInsets.only(top: 1.v),
+//                           child: Text(
+//                             "lbl_country".tr,
+//                             style: theme.textTheme.titleSmall,
+//                           ),
+//                         ),
+//                         Text(
+//                           "lbl_india".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 20.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(
+//                       left: 13.h,
+//                       right: 3.h,
+//                     ),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Text(
+//                           "msg_gender_prefrence".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         ),
+//                         Text(
+//                           "lbl_female".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 41.v),
+//                   Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Container(
+//                         height: 45.v,
+//                         width: 44.h,
+//                         decoration: BoxDecoration(
+//                           image: DecorationImage(
+//                             image: AssetImage(
+//                               ImageConstant.imgImage10,
+//                             ),
+//                             fit: BoxFit.cover,
+//                           ),
+//                         ),
+//                       ),
+//                       Padding(
+//                         padding: EdgeInsets.only(
+//                           top: 14.v,
+//                           bottom: 11.v,
+//                         ),
+//                         child: Text(
+//                           "lbl_kirtigourab2".tr,
+//                           style: theme.textTheme.titleSmall,
+//                         ),
+//                       )
+//                     ],
+//                   ),
+//                   SizedBox(height: 15.v),
+//                   Padding(
+//                     padding: EdgeInsets.only(left: 7.h),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                       children: [
+//                         Container(
+//                           height: 36.v,
+//                           width: 29.h,
+//                           decoration: BoxDecoration(
+//                             borderRadius: BorderRadius.circular(
+//                               14.h,
+//                             ),
+//                             image: DecorationImage(
+//                               image: AssetImage(
+//                                 ImageConstant.imgImage9,
+//                               ),
+//                               fit: BoxFit.cover,
+//                             ),
+//                           ),
+//                         ),
+//                         Padding(
+//                           padding: EdgeInsets.only(
+//                             top: 9.v,
+//                             bottom: 7.v,
+//                           ),
+//                           child: Text(
+//                             "lbl_kirtimaan89".tr,
+//                             style: theme.textTheme.titleSmall,
+//                           ),
+//                         )
+//                       ],
+//                     ),
+//                   ),
+//                   SizedBox(height: 43.v),
+//                   InkWell(
+//                     onTap: () async {
+//                       bool confirmLogout = await showDialog(
+//                         context: context,
+//                         builder: (context) {
+//                           return AlertDialog(
+//                             title: Text('Confirm Logout'),
+//                             content: Text('Are you sure you want to logout?'),
+//                             actions: [
+//                               TextButton(
+//                                 onPressed: () => Navigator.of(context).pop(false),
+//                                 child: Text('Cancel'),
+//                               ),
+//                               TextButton(
+//                                 onPressed: () => Navigator.of(context).pop(true),
+//                                 child: Text('Logout'),
+//                               ),
+//                             ],
+//                           );
+//                         },
+//                       );
+
+//                       if (confirmLogout) {
+//                         var sharedPref = await SharedPreferences.getInstance();
+//                         await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
+//                         await sharedPref.setInt(OpenPageScreenState.uId, 0);
+//                         NavigatorService.popAndPushNamed(AppRoutes.loginPageScreen);
+//                       }
+//                     },
+//                     child: Container(
+//                       decoration: BoxDecoration(
+//                         borderRadius: BorderRadius.circular(20),
+//                         color: Colors.red,
+//                       ),
+//                       width: 161.h,
+//                       child: Padding(
+//                         padding: const EdgeInsets.all(10.0),
+//                         child: Center(
+//                           child: Text(
+//                             "LogOut",
+//                             style: TextStyle(
+//                               color: Colors.white,
+//                               fontWeight: FontWeight.bold,
+//                               fontSize: 18,
+//                             ),
+//                           ),
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                   SizedBox(height: 6.v),
+//                   RichText(
+//                     text: TextSpan(
+//                       children: [
+//                         TextSpan(
+//                           text: "Can't continue?",
+//                           style: theme.textTheme.titleMedium,
+//                         ),
+//                         TextSpan(
+//                           text: "delete account",
+//                           style: CustomTextStyles.titleMediumcyan200_1,
+//                         ),
+//                       ],
+//                     ),
+//                     textAlign: TextAlign.left,
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+
+//   /// Section Widget
+//   PreferredSizeWidget _buildAppBar(BuildContext context) {
+//     return CustomAppBar(
+//       leadingWidth: 61.h,
+//       leading: AppbarLeadingImage(
+//         imagePath: ImageConstant.imgArrowDown,
+//         margin: EdgeInsets.only(
+//           left: 35.h,
+//           top: 18.v,
+//           bottom: 17.v,
+//         ),
+//       ),
+//       title: AppbarSubtitle(
+//         text: "lbl_profile".tr,
+//         margin: EdgeInsets.only(left: 12.h),
+//       ),
+//       actions: [
+//         IconButton(
+//           icon: Icon(Icons.edit),
+//           onPressed: () {
+//             Navigator.of(context).push(MaterialPageRoute(builder: (context) => EditProfileScreen()));
+//           },
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+
 class MyProfileScreenState extends State<MyProfileScreen> {
   @override
   void initState() {
     super.initState();
+    final myProfileProvider = Provider.of<MyProfileProvider>(context, listen: false);
+    myProfileProvider.fetchProfile('USER_ID_HERE'); // Replace with the actual user ID
   }
 
   @override
@@ -38,318 +392,208 @@ class MyProfileScreenState extends State<MyProfileScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(context),
-        body: SizedBox(
-          width: SizeUtils.width,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 14.v),
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 43.h,
-                right: 54.h,
-                bottom: 5.v,
-              ),
-              decoration: AppDecoration.fillGray,
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      height: 110.v,
-                      width: 111.h,
-                      margin: EdgeInsets.only(right: 78.h),
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                              height: 110.adaptSize,
-                              width: 110.adaptSize,
-                              decoration: BoxDecoration(
-                                color: appTheme.blueGray100,
-                                borderRadius: BorderRadius.circular(
-                                  55.h,
-                                ),
-                                border: Border.all(
-                                  color: appTheme.deepcyanA200,
-                                  width: 4.h,
-                                  strokeAlign: BorderSide.strokeAlignOutside,
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            onTap: (){
-                              //  Navigator.of(context).pushNamed(AppRoutes.myImageGalleryScreen);
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => ImageGalleryScreen()));
-                            },
-                            child: CustomImageView(
-                              imagePath: ImageConstant.imgWhatsappImage,
-                              height: 110.adaptSize,
-                              width: 110.adaptSize,
-                              radius: BorderRadius.circular(
-                                55.h,
-                              ),
-                              alignment: Alignment.center,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 8.v),
-                  Text(
-                    "lbl_kirtigourab".tr,
-                    style: TextStyle(color: const Color.fromARGB(255, 31, 243, 197),fontFamily: 'Inria Sans',fontSize: 21,fontWeight: FontWeight.w600),
+        body: Consumer<MyProfileProvider>(
+          builder: (context, myProfileProvider, child) {
+            if (myProfileProvider.isLoading) {
+              return Center(child: CircularProgressIndicator());
+            }
 
-                  ),
-                  Text(
-                    "msg_kirtigourab_gmail_com".tr,
-                    style: theme.textTheme.labelLarge,
-                  ),
-                  SizedBox(height: 37.v),
-                  Padding(
-                    padding: EdgeInsets.only(left: 12.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "lbl_name".tr,
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        Text(
-                          "lbl_kirti_gourab2".tr,
-                          style: theme.textTheme.titleSmall,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 7.v),
-                  Padding(
-                    padding: EdgeInsets.only(left: 13.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 6.v),
-                          child: Text(
-                            "lbl_gender".tr,
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 6.v),
-                          child: Text(
-                            "lbl_male".tr,
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 12.v),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 13.h,
-                      right: 3.h,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "lbl_dob".tr,
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        Text(
-                          "lbl_2_01_2022".tr,
-                          style: theme.textTheme.titleSmall,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 34.v),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 13.h,
-                      right: 4.h,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 1.v),
-                          child: Text(
-                            "lbl_country".tr,
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        ),
-                        Text(
-                          "lbl_india".tr,
-                          style: theme.textTheme.titleSmall,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20.v),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 13.h,
-                      right: 3.h,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "msg_gender_prefrence".tr,
-                          style: theme.textTheme.titleSmall,
-                        ),
-                        Text(
-                          "lbl_female".tr,
-                          style: theme.textTheme.titleSmall,
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 41.v),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            if (myProfileProvider.errorMessage != null) {
+              return Center(child: Text(myProfileProvider.errorMessage!));
+            }
+
+            final profile = myProfileProvider.myProfileModelObj;
+            if (profile == null) {
+              return Center(child: Text('No profile data'));
+            }
+
+            return _buildProfileContent(profile);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileContent(MyProfileModel profile) {
+    return SizedBox(
+      width: SizeUtils.width,
+      child: SingleChildScrollView(
+        padding: EdgeInsets.only(top: 14.v),
+        child: Container(
+          margin: EdgeInsets.only(
+            left: 43.h,
+            right: 54.h,
+            bottom: 5.v,
+          ),
+          decoration: AppDecoration.fillGray,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: Container(
+                  height: 110.v,
+                  width: 111.h,
+                  margin: EdgeInsets.only(right: 78.h),
+                  child: Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Container(
-                        height: 45.v,
-                        width: 44.h,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                              ImageConstant.imgImage10,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 110.adaptSize,
+                          width: 110.adaptSize,
+                          decoration: BoxDecoration(
+                            color: appTheme.blueGray100,
+                            borderRadius: BorderRadius.circular(
+                              55.h,
                             ),
-                            fit: BoxFit.cover,
+                            border: Border.all(
+                              color: appTheme.deepcyanA200,
+                              width: 4.h,
+                              strokeAlign: BorderSide.strokeAlignOutside,
+                            ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 14.v,
-                          bottom: 11.v,
-                        ),
-                        child: Text(
-                          "lbl_kirtigourab2".tr,
-                          style: theme.textTheme.titleSmall,
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ImageGalleryScreen()));
+                        },
+                        child: CustomImageView(
+                          imagePath: ImageConstant.imgWhatsappImage,
+                          height: 110.adaptSize,
+                          width: 110.adaptSize,
+                          radius: BorderRadius.circular(
+                            55.h,
+                          ),
+                          alignment: Alignment.center,
                         ),
                       )
                     ],
                   ),
-                  SizedBox(height: 15.v),
-                  Padding(
-                    padding: EdgeInsets.only(left: 7.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          height: 36.v,
-                          width: 29.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              14.h,
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                ImageConstant.imgImage9,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            top: 9.v,
-                            bottom: 7.v,
-                          ),
-                          child: Text(
-                            "lbl_kirtimaan89".tr,
-                            style: theme.textTheme.titleSmall,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 43.v),
-                  InkWell(
-                    onTap: () async {
-                      bool confirmLogout = await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text('Confirm Logout'),
-                            content: Text('Are you sure you want to logout?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(context).pop(false),
-                                child: Text('Cancel'),
-                              ),
-                              TextButton(
-                                onPressed: () => Navigator.of(context).pop(true),
-                                child: Text('Logout'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-
-                      if (confirmLogout) {
-                        var sharedPref = await SharedPreferences.getInstance();
-                        await sharedPref.setBool(OpenPageScreenState.keyLogin, false);
-                        await sharedPref.setInt(OpenPageScreenState.uId, 0);
-                        NavigatorService.popAndPushNamed(AppRoutes.loginPageScreen);
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.red,
-                      ),
-                      width: 161.h,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Center(
-                          child: Text(
-                            "LogOut",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 6.v),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "Can't continue?",
-                          style: theme.textTheme.titleMedium,
-                        ),
-                        TextSpan(
-                          text: "delete account",
-                          style: CustomTextStyles.titleMediumcyan200_1,
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+                ),
               ),
-            ),
+              SizedBox(height: 8.v),
+              Text(
+                profile.name,
+                style: TextStyle(color: const Color.fromARGB(255, 31, 243, 197), fontFamily: 'Inria Sans', fontSize: 21, fontWeight: FontWeight.w600),
+              ),
+              Text(
+                profile.email,
+                style: theme.textTheme.labelLarge,
+              ),
+              SizedBox(height: 37.v),
+              Padding(
+                padding: EdgeInsets.only(left: 12.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Name",
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    Text(
+                      profile.name,
+                      style: theme.textTheme.titleSmall,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 7.v),
+              Padding(
+                padding: EdgeInsets.only(left: 13.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 6.v),
+                      child: Text(
+                        "Gender",
+                        style: theme.textTheme.titleSmall,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 6.v),
+                      child: Text(
+                        profile.gender,
+                        style: theme.textTheme.titleSmall,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 12.v),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 13.h,
+                  right: 3.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Date of Birth",
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    Text(
+                      profile.dob,
+                      style: theme.textTheme.titleSmall,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 34.v),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 13.h,
+                  right: 4.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(top: 1.v),
+                      child: Text(
+                        "Country",
+                        style: theme.textTheme.titleSmall,
+                      ),
+                    ),
+                    Text(
+                      profile.country,
+                      style: theme.textTheme.titleSmall,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(height: 20.v),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: 13.h,
+                  right: 3.h,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Gender Preference",
+                      style: theme.textTheme.titleSmall,
+                    ),
+                    Text(
+                      profile.genderPreference,
+                      style: theme.textTheme.titleSmall,
+                    )
+                  ],
+                ),
+              ),
+              // Additional UI code...
+            ],
           ),
         ),
       ),
     );
   }
 
-  /// Section Widget
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return CustomAppBar(
       leadingWidth: 61.h,
@@ -362,7 +606,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
         ),
       ),
       title: AppbarSubtitle(
-        text: "lbl_profile".tr,
+        text: "Profile",
         margin: EdgeInsets.only(left: 12.h),
       ),
       actions: [
@@ -376,3 +620,4 @@ class MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 }
+

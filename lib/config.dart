@@ -6,3 +6,4 @@ final checkUserRoute=url+"checkUser";
 final checkInstaRoute=url+"checkInsta";
 final checkSnapRoute=url+"checkSnap";
 final claimGemsRoute =url+"addViaClaimButton";
+final getprofileRoute= url+"getProfile";
