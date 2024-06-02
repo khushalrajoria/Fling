@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -5,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../config.dart';
 import '../../open_page_screen/open_page_screen.dart';
 import '../models/my_profile_model.dart';
-
 // class MyProfileProvider extends ChangeNotifier {
 //   MyProfileModel? myProfileModelObj;
 //   bool isLoading = false;
@@ -55,19 +55,14 @@ import '../models/my_profile_model.dart';
 
 //     if (response.statusCode == 200) {
 //       var resp = jsonDecode(response.body);
-//       return MyProfileModel.fromJson(resp['msg']);
+//       return MyProfileModel.fromJson(resp['msg']['msg']);
 //     } else {
 //       throw Exception('Failed to load profile with status code: ${response.statusCode}');
 //     }
 //   }
 // }
 
-// import 'package:flutter/material.dart';
-// import 'dart:convert';
-// import 'package:http/http.dart' as http;
-// import 'package:shared_preferences/shared_preferences.dart';
-// import '../../config.dart';
-// import '../models/my_profile_model.dart';
+
 
 class MyProfileProvider extends ChangeNotifier {
   MyProfileModel? myProfileModelObj;
@@ -91,10 +86,12 @@ class MyProfileProvider extends ChangeNotifier {
   }
 }
 
+
 class ApiService {
   Future<MyProfileModel> fetchProfile() async {
     var sharedPref = await SharedPreferences.getInstance();
-    var uId = sharedPref.getInt(OpenPageScreenState.uId);
+    // var uId = sharedPref.getInt('uId');  // Assuming 'uId' is the correct key
+     var uId = sharedPref.getInt(OpenPageScreenState.uId);
     print('uId: $uId');
 
     if (uId == null) {
@@ -106,7 +103,7 @@ class ApiService {
     };
 
     var response = await http.post(
-      Uri.parse(getprofileRoute),
+      Uri.parse(getprofileRoute),  
       headers: {
         "Content-Type": "application/json"
       },

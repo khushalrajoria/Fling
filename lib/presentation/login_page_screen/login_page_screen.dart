@@ -11,7 +11,7 @@ import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../open_page_screen/open_page_screen.dart';
-import 'models/login_page_model.dart';
+
 import 'provider/login_page_provider.dart';
 
 class LoginPageScreen extends StatefulWidget {
@@ -166,8 +166,22 @@ class LoginPageScreenState extends State<LoginPageScreen> {
   }
 
   void onTapSignInWithButton(BuildContext context) async {
-    await GoogleAuthHelper().googleSignInProcess().then((googleUser) {
+    await GoogleAuthHelper().googleSignInProcess().then((googleUser) async {
       if (googleUser != null) {
+        String? email = googleUser.email;
+        var body={
+          "email":email
+        };
+        var response =await http.post(
+            Uri.parse(signinwithgoogleroute),
+            headers: {
+              "content-type":"application/json"
+            },
+            body: jsonEncode(body));
+        var resp =jsonDecode(response.body);
+        var sharedPref=await SharedPreferences.getInstance();
+        await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
+        await sharedPref.setInt(OpenPageScreenState.uId , int.parse(resp['msg']));
         Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('user data is empty')));

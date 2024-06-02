@@ -1,3 +1,5 @@
+// import 'dart:convert';
+
 // class MyProfileModel {
 //   final String name;
 //   final String email;
@@ -11,6 +13,7 @@
 //   final String instaID;
 //   final String snapID;
 //   final String genderPreference;
+//   final Base64Codec profilePic;
 
 //   MyProfileModel({
 //     required this.name,
@@ -22,6 +25,7 @@
 //     required this.dob,
 //     required this.instaID,
 //     required this.snapID,
+//     required this.profilePic,
 //     required this.country,
 //     required this.prefcountry,
 //     required this.genderPreference,
@@ -29,18 +33,20 @@
 
 //   factory MyProfileModel.fromJson(Map<String, dynamic> json) {
 //     return MyProfileModel(
-//       name: json['fullName'],
-//       email: json['dateOfBirth'],
-//       gender: json['gender'],
-//       prefgender: json['prefGender'],
-//       preferredgender: json['prefGender'],
-//       instaID: json['instaId'],
-//       snapID: json['snapchatId'],
-//       maingender: json['maingender'],
-//       dob: json['dob'],
-//       country: json['country'],
-//       prefcountry: json['preferredCountry'],
-//       genderPreference: json['genderPreference'],
+//       name: json['fullname'] ?? '',
+//       email: json['email'] ?? '',
+
+//       gender: json['gender'] ?? '',
+//       prefgender: json['prefgender'] ?? '',
+//       preferredgender: json['preferredgender'] ?? '',
+//       maingender: json['maingender'] ?? '',
+//       dob: json['dateofbirth'] ?? '',
+//       instaID: json['instaid'] ?? '',
+//       snapID: json['snapchatid'] ?? '',
+//       profilePic: json['imageFile164']?? '',
+//       country: json['country'] ?? '',
+//       prefcountry: json['preferredcountry'] ?? '',
+//       genderPreference: json['preferredgender'] ?? '',
 //     );
 //   }
 // }
@@ -53,22 +59,26 @@ class MyProfileModel {
   final String preferredgender;
   final String maingender;
   final String dob;
+  final int gemcount;
   final String country;
   final String prefcountry;
   final String instaID;
   final String snapID;
   final String genderPreference;
+  final String profilePic;
 
   MyProfileModel({
     required this.name,
     required this.email,
     required this.gender,
     required this.prefgender,
+    required this.gemcount,
     required this.preferredgender,
     required this.maingender,
     required this.dob,
     required this.instaID,
     required this.snapID,
+    required this.profilePic,
     required this.country,
     required this.prefcountry,
     required this.genderPreference,
@@ -83,8 +93,10 @@ class MyProfileModel {
       preferredgender: json['preferredgender'] ?? '',
       maingender: json['maingender'] ?? '',
       dob: json['dateofbirth'] ?? '',
+      gemcount: json['gemcount'] ?? '',
       instaID: json['instaid'] ?? '',
       snapID: json['snapchatid'] ?? '',
+      profilePic: json['imageFile164'] ?? '',
       country: json['country'] ?? '',
       prefcountry: json['preferredcountry'] ?? '',
       genderPreference: json['preferredgender'] ?? '',

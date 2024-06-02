@@ -1,1 +1,3 @@
-class HomePageContainerModel {}
+class HomePageContainerModel {
+  // final in
+}

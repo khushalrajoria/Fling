@@ -1,5 +1,5 @@
+import 'dart:convert'; // Add this import for base64 decoding
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../../core/app_export.dart';
 
 class ProfileCard extends StatefulWidget {
@@ -25,7 +25,14 @@ class _ProfileCardState extends State<ProfileCard> {
 
   void _cyclePhotos() {
     setState(() {
-      currentIndex = (currentIndex + 1) % widget.imagePaths.length;
+      int nextIndex = (currentIndex + 1) % widget.imagePaths.length;
+      if (widget.imagePaths[nextIndex].isNotEmpty) {
+        currentIndex = nextIndex;
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Next image is not available!')),
+        );
+      }
     });
   }
 
@@ -35,19 +42,24 @@ class _ProfileCardState extends State<ProfileCard> {
       onTap: _cyclePhotos,
       child: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.width * 3,
+        height: MediaQuery.of(context).size.width * 1.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.0),
           image: DecorationImage(
-            image: AssetImage(widget.imagePaths[currentIndex]),
+            image: MemoryImage(base64Decode(widget.imagePaths[currentIndex])),
             fit: BoxFit.cover,
-            colorFilter:
-                ColorFilter.mode(Colors.black.withOpacity(0.3), BlendMode.darken),
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.3),
+              BlendMode.darken,
+            ),
           ),
         ),
         child: Stack(
           children: [
-            // Transparent container for bottom gradient
+            Container(
+              color: const Color.fromARGB(38, 158, 158, 158),
+              height: MediaQuery.of(context).size.width * 1.5
+            ),
             Positioned(
               bottom: 0.0,
               left: 0.0,
@@ -60,7 +72,7 @@ class _ProfileCardState extends State<ProfileCard> {
                     end: Alignment.topCenter,
                     colors: [
                       Colors.black.withOpacity(0.8),
-                      Colors.transparent
+                      Colors.transparent,
                     ],
                   ),
                 ),
@@ -68,7 +80,9 @@ class _ProfileCardState extends State<ProfileCard> {
             ),
             // Text content with padding
             Positioned(
-              bottom: 60,
+              bottom: 20,
+              left: 16,
+              right: 16,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.h, vertical: 20.v),
                 child: Row(
@@ -89,20 +103,14 @@ class _ProfileCardState extends State<ProfileCard> {
                         ),
                         SizedBox(height: 5.h),
                         Text(
-                          "${widget.age} years old",
+                          widget.country,
                           style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 16.h,
+                            color: Colors.white,
+                            fontSize: 14.h,
                           ),
                         ),
+                        SizedBox(height: 22.h),
                       ],
-                    ),
-                    Text(
-                      widget.country,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.h,
-                      ),
                     ),
                   ],
                 ),
