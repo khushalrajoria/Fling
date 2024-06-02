@@ -17,17 +17,20 @@ import 'widgets/productcard_item_widget.dart';
 
 
 class PurchaseDrawerScreen extends StatefulWidget {
-  const PurchaseDrawerScreen({Key? key})
-      : super(
-          key: key,
-        );
+  final int gemcount;
+    PurchaseDrawerScreen({
+    required this.gemcount,
+    
+  });
 
   @override
   PurchaseDrawerScreenState createState() => PurchaseDrawerScreenState();
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => PurchaseDrawerProvider(),
-      child: PurchaseDrawerScreen(),
+      child: PurchaseDrawerScreen(
+        gemcount: 0,
+      ),
     );
   }
 }
@@ -39,7 +42,7 @@ class PurchaseDrawerScreenState extends State<PurchaseDrawerScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
     return SafeArea(
       child: Scaffold(
         appBar: _buildAppBar(context),
@@ -80,7 +83,7 @@ class PurchaseDrawerScreenState extends State<PurchaseDrawerScreen> {
                         right: 5.h,
                       ),
                       child: Text(
-                        "lbl_100".tr,
+                        '${widget.gemcount}',
                         style: theme.textTheme.headlineMedium,
                       ),
                     )

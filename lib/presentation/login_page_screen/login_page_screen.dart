@@ -179,10 +179,15 @@ class LoginPageScreenState extends State<LoginPageScreen> {
             },
             body: jsonEncode(body));
         var resp =jsonDecode(response.body);
-        var sharedPref=await SharedPreferences.getInstance();
-        await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
-        await sharedPref.setInt(OpenPageScreenState.uId , int.parse(resp['msg']));
-        Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
+        if(resp['msg']!=null){
+      var sharedPref=await SharedPreferences.getInstance();
+      await sharedPref.setBool(OpenPageScreenState.keyLogin, true);
+      await sharedPref.setInt(OpenPageScreenState.uId , int.parse(resp['msg']));
+      Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
+      }
+        else{
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Don't Exist Kindly Sign Up")));
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('user data is empty')));
       }

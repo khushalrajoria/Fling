@@ -13,7 +13,7 @@ class UserModel {
   final String? preferredCountry;
   final String? preferredGender;
   final String? prefGender;
-  final int gemCount;
+  late  int gemCount;
   final String email;
   final int age;
 
