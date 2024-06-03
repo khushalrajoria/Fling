@@ -1,1 +1,0 @@
-class Page1SignUpModel {}
