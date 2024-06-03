@@ -1,4 +1,4 @@
-final url="https://f33b-2401-4900-1f32-8fff-00-20a-5c73.ngrok-free.app/";
+final url="YOUR API HERE";
 final registerRoute=url+"register";
 final loginRoute=url+"login";
 final checkUserRoute=url+"checkUser";
