@@ -1,0 +1,47 @@
+import { Router } from "express";
+import registerUserController from "../controller/userRegisterationController.js";
+import loginUserController from "../controller/userLoginController.js";
+import checkExistingUserController from "../controller/checkExistingUserController.js";
+import swipeController from "../controller/swipeController.js";
+import FriendController from"../controller/FriendController.js";
+import deleteUserController from "../controller/deleteUserController.js";
+import gemController from "../controller/gemController.js";
+import getUserInfoController from "../controller/getUserInfoController.js";
+import updateUserInfoController from "../controller/updateUserInfoController.js";
+import fillPageController from "../controller/fillPageController.js";
+
+
+const router=Router();
+router.post("/register",registerUserController.registerUser);
+router.post("/login",loginUserController.verifyUserController);
+router.post("/checkUser",checkExistingUserController.checkExistingUser);
+router.post("/getID",getUserInfoController.getUserIDController);
+router.post("/checkImage",registerUserController.verifyImage);
+router.post("/checkInsta",registerUserController.verifyInsta);
+router.post("/checkSnap",registerUserController.verifySnap);
+router.post("/leftSwipe",swipeController.LeftSwipeController);
+router.post("/rightSwipe",swipeController.RightSwipeController);
+router.post("/addFriend",FriendController.addFriendController);
+router.post("/rejectFriend",FriendController.rejectFriendController);
+router.post("/deleteUser",deleteUserController.deleteUserFunction);
+router.get("/getGemCount",gemController.gemCountController);
+router.post("/remove10gems",gemController.remove10gemsController);
+router.post("/addGems",gemController.purchaseGemsController);
+router.post("/addViaClaimButton",gemController.addViaClaimButton);
+router.post("/getProfile",getUserInfoController.getUserInfoController);
+router.post("/getProfile/name",getUserInfoController.getNameController);
+router.post("/getProfile/dateOfBirth",getUserInfoController.getDateOfBirthController);
+router.post("/getProfile/age",getUserInfoController.getAgeController);
+router.post("/getProfile/country",getUserInfoController.getCountryController);
+router.post("/getProfile/gems",getUserInfoController.getGemCountController);
+router.post("/getProfile/gender",getUserInfoController.getGenderController);
+router.post("/getProfile/insta",getUserInfoController.getInstaController);
+router.post("/getProfile/snap",getUserInfoController.getSnapController);
+router.post("/getProfile/preferredCountry",getUserInfoController.getPreferredCountryController);
+router.post ("/getProfile/preferredGender",getUserInfoController.getPreferredGenderController);
+router.post("/updateUserInfo",updateUserInfoController.updateInfoController);
+router.post("/getRequests",fillPageController.fillRequestsPageController);
+router.post("/getFriends",fillPageController.fillFriendsPageController);
+router.post("/getUsers",fillPageController.fillUsersPageController);
+
+export default router;
