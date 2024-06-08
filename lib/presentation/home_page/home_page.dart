@@ -45,8 +45,9 @@ class HomePageState extends State<HomePage> {
         body: homeProvider.isLoading
             ? Center(child: CircularProgressIndicator())
             : homeProvider.users.isEmpty
-                ? Center(child: Text("No users available"))
+                ? Center(child: Text("No users available",style: TextStyle(color: Colors.black),))
                 : Container(
+                  color: Color.fromRGBO(250, 249, 246, 1),
                     width: double.maxFinite,
                     padding: EdgeInsets.symmetric(horizontal: 13.h, vertical: 10.v),
                     child: SingleChildScrollView(
@@ -198,7 +199,7 @@ class HomePageState extends State<HomePage> {
           },
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.cyan,
+              color: const Color.fromRGBO(	124	,124,	229, 1),
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding: EdgeInsets.all(8.0),

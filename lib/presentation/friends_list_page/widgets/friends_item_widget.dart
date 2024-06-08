@@ -28,7 +28,7 @@ class FriendsItemWidget extends StatelessWidget {
           ),
           Text(
             friendsItemModelObj.naziaTwo!,
-            style: CustomTextStyles.titleSmallWhiteA700,
+            style: CustomTextStyles.titleSmallblakeA700,
           )
         ],
       ),

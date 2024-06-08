@@ -7,7 +7,6 @@ import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../page_3_sign_up_screen/provider/page_3_sign_up_provider.dart';
-import 'models/page_2_sign_up_model.dart';
 import 'provider/page_2_sign_up_provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -110,7 +109,7 @@ class Page2SignUpScreenState extends State<Page2SignUpScreen> {
                       ),
                       TextSpan(
                         text: "msg_you_must_enter_one".tr,
-                        style: theme.textTheme.bodySmall,
+                        style: TextStyle(color: Colors.black),
                       )
                     ],
                   ),

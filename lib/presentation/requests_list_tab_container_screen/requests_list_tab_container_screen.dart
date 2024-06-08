@@ -38,12 +38,14 @@ class RequestsListTabContainerPageState
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+
       child: Scaffold(
         appBar: _buildAppBar(context),
         body: Container(
+          color: Color.fromRGBO(250, 249, 246, 1),
           width: double.maxFinite,
           margin: EdgeInsets.only(top: 8.v),
-          decoration: AppDecoration.fillGray,
+          // decoration: AppDecoration.fillGray,
           child: Column(
             children: [
               _buildTabview(context),
@@ -79,7 +81,7 @@ class RequestsListTabContainerPageState
         ),
       ),
       title: AppbarTitle(
-        text: "lbl_notifications".tr,
+        text: " lbl_notifications".tr,
         margin: EdgeInsets.only(left: 12.h),
       ),
     );
@@ -87,7 +89,8 @@ class RequestsListTabContainerPageState
 
   /// Section Widget
   Widget _buildTabview(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Color.fromRGBO(250, 249, 246, 1),
       height: 49.v,
       width: 310.h,
       child: TabBar(
@@ -99,7 +102,8 @@ class RequestsListTabContainerPageState
           fontFamily: 'Mulish',
           fontWeight: FontWeight.w800,
         ),
-        unselectedLabelColor: theme.colorScheme.onPrimary,
+        // unselectedLabelColor:Colors.black,
+        unselectedLabelColor:Colors.black,
         unselectedLabelStyle: TextStyle(
           fontSize: 6.fSize,
           fontFamily: 'Mulish',

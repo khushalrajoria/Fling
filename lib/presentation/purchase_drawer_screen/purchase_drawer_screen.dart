@@ -109,14 +109,14 @@ class PurchaseDrawerScreenState extends State<PurchaseDrawerScreen> {
          onTap: () {
             Navigator.of(context).pushNamed(AppRoutes.homePageContainerScreen);
   },
-        imagePath: ImageConstant.imgArrowDown,
+        imagePath: ImageConstant.imgArrowDownOnprimary,
         margin: EdgeInsets.only(
           left: 27.h,
           top: 18.v,
           bottom: 18.v,
         ),
       ),
-      title: Text('Points',style: TextStyle(color: appTheme.cyan300,fontSize: 20.fSize, fontFamily: 'Inria Sans',
+      title: Text(' Points',style: TextStyle(color: appTheme.cyan300,fontSize: 20.fSize, fontFamily: 'Inria Sans',
           fontWeight: FontWeight.w900,),)
     );
   }

@@ -48,7 +48,7 @@ class GenderDetailsScreenState extends State<GenderDetailsScreen> {
   String maingender=''; 
   String _addMoreButton1Text = 'Add more About your Gender as man ';
 String _addMoreButton2Text = 'Add more About your Gender as Woman';
-String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track the index of the selected button
+String _addMoreButton3Text = 'Add more About your Gender';// Track the index of the selected button
 
   @override
   void initState() {
@@ -85,7 +85,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
                   style: theme.textTheme.titleLarge!,
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedButtonIndex == 0 ? Colors.green: null,
+                  backgroundColor: selectedButtonIndex == 0 ? Color.fromRGBO(36, 59, 189, 1): null,
                    minimumSize: Size(360, 69)
                 ),
               ),
@@ -120,7 +120,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 1
-                      ? Colors.green
+                      ? Color.fromRGBO(36, 59, 189, 1)
                       : null, 
                       minimumSize: Size(360, 69)
                 ),
@@ -156,7 +156,7 @@ String _addMoreButton3Text = 'Add more About your Gender as Non-Binary';// Track
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 2
-                      ? Colors.green
+                      ? Color.fromRGBO(36, 59, 189, 1)
                       : null, 
                       minimumSize: Size(360, 69)
                 ),

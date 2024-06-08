@@ -144,7 +144,7 @@ class SignupPageScreenState extends State<SignupPageScreen> {
   /// Section Widget
   Widget _buildRegisterButton(BuildContext context) {
     return CustomElevatedButton(
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 31, 243, 197))),
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(62, 146, 204, 1))),
       text: "lbl_register".tr,
       margin: EdgeInsets.only(
         left: 5.h,
@@ -161,7 +161,7 @@ class SignupPageScreenState extends State<SignupPageScreen> {
   /// Section Widget
   Widget _buildExistingUserLoginButton(BuildContext context) {
     return CustomElevatedButton(
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 31, 243, 197))),
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(62, 146, 204, 1))),
       text: "msg_existing_user_login".tr,
       margin: EdgeInsets.only(
         left: 5.h,

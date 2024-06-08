@@ -126,8 +126,8 @@ class TextThemes {
           fontWeight: FontWeight.w400,
         ),
         titleLarge: TextStyle(
-          color: colorScheme.onPrimary,
-          fontSize: 23.fSize,
+          color: Color.fromARGB(255, 85, 85, 221),
+          fontSize: 14.fSize,
           fontFamily: 'Inika',
           fontWeight: FontWeight.w400,
         ),
@@ -153,7 +153,7 @@ class TextThemes {
           fontWeight: FontWeight.w700,
         ),
         titleSmall: TextStyle(
-          color: colorScheme.onPrimary,
+          color:Color.fromRGBO(14,17,17,1) ,
           fontSize: 14.fSize,
           fontFamily: 'Inria Sans',
           fontWeight: FontWeight.w700,
@@ -178,33 +178,32 @@ class TextThemes {
 /// Class containing the supported color schemes.
 class ColorSchemes {
   static final lightCodeColorScheme = ColorScheme.light(
-    primary: Color.fromARGB(255,31, 243, 197),
+    primary: Color.fromRGBO(62, 146, 204, 1),
     // onPrimary: Color(0XFFFFFFFF),
     // onPrimaryContainer: Color(0XFFFF0000),
-     onPrimary: Color.fromARGB(255, 255, 255, 255),
-    onPrimaryContainer: Color.fromARGB(255, 31, 243, 197), // 
+     onPrimary: Color.fromRGBO(250, 249, 246, 1),
+    // onPrimaryContainer: Color.fromARGB(255, 31, 243, 1), // 
   );
 }
 
-/// Class containing custom colors for a lightCode theme.
 class LightCodeColors {
   // Black
-  Color get black900 => Color(0XFF000000); // back
+  Color get black900 => Color.fromRGBO(14,17,17,1); // back
 // Blackf
-  Color get black9007f => Color(0X7F000000);
+  Color get black9007f => Color.fromRGBO(14,17,17,1);
 // BlueGray
   Color get blueGray100 => Color(0XFFD9D9D9);
-  Color get blueGray400 => Color(0XFF888888);
-// DeepOrange
-  Color get deepOrange600 => Color(0XFFF25022);
-// Gray
+  Color get blueGray400 => Color.fromRGBO(14,17,17, 1);
+
   Color get gray300 => Color(0XFFE6E6E6);
-  Color get gray900 => Color(0XFF1C1C1C);
-// Red
-  Color get black400 => Color.fromARGB(255, 45, 45, 45);
-  Color get insta => Color.fromARGB(186, 253, 116, 116);
+  Color get gray900 => Color.fromRGBO(14,17,17,1);
+
+  // Color get black400 => Color.fromRGBO(255, 205, 210, 1);
+  Color get black400 => Color.fromRGBO(250, 249, 246, 1);
+  // Color get black400 => Color.fromRGBO(240, 74, 96, 1);
+  Color get insta => Color.fromRGBO(252, 228, 236, 1);
   Color get smap => Color.fromARGB(181, 236, 255, 30);
-  Color get cyan300 => Color(0XFF4ADCF0);
+  Color get cyan300 => Color.fromRGBO(	124	,124,	229, 1);
 
   get gray600 => null;
 
@@ -212,18 +211,16 @@ class LightCodeColors {
 
 // Blue
   Color get blue50 => Color(0XFFE8F1FF);
-// BlueGray
-  Color get blueGray10001 => Color(0XFFD9D9D9);
   Color get blueGray900 => Color(0XFF202244);
 // DeepOrange
 // DeepPurple
-  Color get deepcyanA200 => Color.fromARGB(255, 31, 243, 197);
+  Color get deepcyanA200 => Color.fromARGB(255, 85, 85, 221);
 // Gray
-  Color get gray200 => Color.fromARGB(255, 45,45,45);
-  Color get gray50 => Color.fromARGB(255, 45,45,45,);
-  Color get gray700 => Color(0XFF545454);
+  Color get gray200 => Color.fromRGBO(252, 228, 236,1);
+  Color get gray50 => Colors.white;
+  // Color get gray00 => Color(0XFF545454);
 // LightGreen
-  Color get lightGreenA700 => Color(0XFF45CD2F);
+  Color get lightGreenA700 => Color(0XFF45CD2F); // can't detele
 // Red
 
 // White

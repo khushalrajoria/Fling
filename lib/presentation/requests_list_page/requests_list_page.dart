@@ -30,7 +30,8 @@ class RequestsListPageState extends State<RequestsListPage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
+        body: Container(
+          color: Color.fromRGBO(250, 249, 246, 1),
           width: SizeUtils.width,
           child: SingleChildScrollView(
             child: Column(
@@ -80,12 +81,11 @@ class RequestsListPageState extends State<RequestsListPage>
         return Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 7.v),
+              padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 11.v),
               child: InkWell(
                 onTap: (){
                  NavigatorService.pushNamed(
-              AppRoutes.userProfileScreen,
-    );
+              AppRoutes.userProfileScreen,);
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -93,7 +93,7 @@ class RequestsListPageState extends State<RequestsListPage>
                   children: [
                     if (item.hasCircle)
                       Container(
-                        height: 40.v,
+                        height: 49.v,
                         width: 49.h,
                         decoration: BoxDecoration(
                           color: appTheme.black900,
@@ -108,18 +108,19 @@ class RequestsListPageState extends State<RequestsListPage>
                       padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.v),
                       child: Text(
                         item.name.tr,
-                        style: theme.textTheme.titleMedium,
+                        style: theme.textTheme.titleMedium?.copyWith(color: Colors.black),
                       ),
                     ),
                     Spacer(),
                     _buildAcceptButton(context),
                     SizedBox(width: 5.h,),
                     _buildRejectButton(context),
+                  
                   ],
                 ),
               ),
             ),
-            Divider(),
+            // Divider(),
           ],
         );
       },
@@ -131,7 +132,7 @@ class RequestsListPageState extends State<RequestsListPage>
       onPressed: () {},
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Text('Accept',style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),
+        child: Text('Accept',style: TextStyle(color: Color.fromRGBO(250, 249, 246, 1),fontSize: 14,fontWeight: FontWeight.bold),),
       ),
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color?>(appTheme.cyan300)
@@ -144,10 +145,10 @@ class RequestsListPageState extends State<RequestsListPage>
       onPressed: () {},
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Text('Reject',style: TextStyle(color: Colors.white,fontSize: 14,fontWeight: FontWeight.bold),),
+        child: Text('Reject',style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0),fontSize: 14,fontWeight: FontWeight.bold),),
       ),
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color?>(Colors.transparent)
+        backgroundColor: MaterialStateProperty.all<Color?>(Color.fromRGBO(250, 249, 246, 1))
       ),
     );
   }

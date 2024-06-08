@@ -43,7 +43,7 @@ class CustomBottomBarState extends State<CustomBottomBar> {
     return Container(
       height: 65.v,
       decoration: BoxDecoration(
-        color: appTheme.gray200,
+        color: Color.fromRGBO(250, 249, 246, 1),
         borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(20.h),
         ),

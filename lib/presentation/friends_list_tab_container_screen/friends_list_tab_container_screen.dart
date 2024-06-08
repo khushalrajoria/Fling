@@ -308,7 +308,7 @@ class FriendsListTabContainerScreenState extends State<FriendsListTabContainerSc
           fontFamily: 'Mulish',
           fontWeight: FontWeight.w800,
         ),
-         unselectedLabelColor: appTheme.gray300,
+         unselectedLabelColor: appTheme.deepcyanA200,
         unselectedLabelStyle: TextStyle(
           fontSize: 15.fSize,
           fontFamily: 'Mulish',

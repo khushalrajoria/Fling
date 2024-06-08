@@ -75,7 +75,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
             right: 54.h,
             bottom: 5.v,
           ),
-          decoration: AppDecoration.fillGray,
+          decoration: AppDecoration.fillGray.copyWith(color: Color.fromRGBO(250, 249, 246, 1)),
           child: Column(
             children: [
               Align(
@@ -144,14 +144,14 @@ class MyProfileScreenState extends State<MyProfileScreen> {
               Text(
                 profile.name,
                 style: TextStyle(
-                    color: const Color.fromARGB(255, 31, 243, 197),
+                    color: appTheme.cyan300,
                     fontFamily: 'Inria Sans',
                     fontSize: 21,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 profile.email,
-                style: theme.textTheme.labelLarge,
+                style: theme.textTheme.titleSmall,
               ),
               SizedBox(height: 37.v),
               Padding(
@@ -161,7 +161,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     Text(
                       "Name",
-                      style: theme.textTheme.titleSmall,
+                      style: theme.textTheme.titleLarge,
                     ),
                     Text(
                       profile.name,
@@ -181,7 +181,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                       padding: EdgeInsets.only(top: 6.v),
                       child: Text(
                         "Gender",
-                        style: theme.textTheme.titleSmall,
+                        style: theme.textTheme.titleLarge,
                       ),
                     ),
                     Padding(
@@ -205,7 +205,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     Text(
                       "Date of Birth",
-                      style: theme.textTheme.titleSmall,
+                      style: theme.textTheme.titleLarge,
                     ),
                     Text(
                       profile.dob.substring(0,10),
@@ -227,7 +227,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                       padding: EdgeInsets.only(top: 1.v),
                       child: Text(
                         "Country",
-                        style: theme.textTheme.titleSmall,
+                        style: theme.textTheme.titleLarge,
                       ),
                     ),
                     Text(
@@ -248,7 +248,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     Text(
                       "Preference",
-                      style: theme.textTheme.titleSmall,
+                      style: theme.textTheme.titleLarge,
                     ),
                     Text(
                       "${profile.preferredgender}" "${profile.prefgender}",
@@ -394,11 +394,11 @@ class MyProfileScreenState extends State<MyProfileScreen> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "Can't continue?",
-                      style: theme.textTheme.titleMedium,
+                      text: "Can't continue? ",
+                      style: theme.textTheme.titleSmall,
                     ),
                     TextSpan(
-                      text: "delete account",
+                      text: " delete account",
                       style: CustomTextStyles.titleMediumcyan200_1,
                     ),
                   ],
@@ -416,7 +416,7 @@ class MyProfileScreenState extends State<MyProfileScreen> {
     return CustomAppBar(
       leadingWidth: 61.h,
       leading: AppbarLeadingImage(
-        imagePath: ImageConstant.imgArrowDown,
+        imagePath: ImageConstant.imgArrowDownOnprimary,
         margin: EdgeInsets.only(
           left: 35.h,
           top: 18.v,

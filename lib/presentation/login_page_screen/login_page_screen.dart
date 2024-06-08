@@ -143,7 +143,7 @@ class LoginPageScreenState extends State<LoginPageScreen> {
       text: "lbl_login".tr,
       margin: EdgeInsets.symmetric(horizontal: 4.h),
       buttonTextStyle: theme.textTheme.titleLarge!,
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromARGB(255, 31, 243, 197))),
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(62, 146, 204, 1))),
       onPressed: () => loginButton(context),
     );
   }

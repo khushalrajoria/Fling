@@ -71,7 +71,7 @@ class CustomTextStyles {
   static get bodyLargeTiroDevanagariHindiPrimary =>
       theme.textTheme.bodyLarge!.tiroDevanagariHindi.copyWith(
         // color: theme.colorScheme.primary,
-        color: const Color.fromARGB(255, 31, 243, 197),
+        color: Color.fromRGBO(62, 146, 204, 1),
         fontSize: 17.fSize,
       );
   static get bodySmallInterOnPrimary =>
@@ -177,6 +177,10 @@ class CustomTextStyles {
       );
   static get titleSmallWhiteA700 => theme.textTheme.titleSmall!.copyWith(
         color: appTheme.whiteA700,
+        fontWeight: FontWeight.w800,
+      );
+  static get titleSmallblakeA700 => theme.textTheme.titleSmall!.copyWith(
+        color: Colors.black,
         fontWeight: FontWeight.w800,
       );
 }

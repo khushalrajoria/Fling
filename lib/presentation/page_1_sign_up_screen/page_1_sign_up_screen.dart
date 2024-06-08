@@ -78,7 +78,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
                           ),
                           TextSpan(
                             text: "msg_you_must_be_at_least".tr,
-                            style: theme.textTheme.bodySmall,
+                            style: TextStyle(color: Colors.black),
                           )
                         ],
                       ),
@@ -165,7 +165,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
         flagState: CountryFlag.ENABLE,
         dropdownDecoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white,
+          color: Color.fromRGBO(250, 249, 246, 1),
           border: Border.all(color: Colors.grey.shade300, width: 1),
         ),
         countrySearchPlaceholder: "Country",

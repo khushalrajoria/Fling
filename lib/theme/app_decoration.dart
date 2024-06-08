@@ -16,7 +16,7 @@ class AppDecoration {
         color: appTheme.black400,
       );
    static BoxDecoration get fillSecondaryContainer => BoxDecoration(
-        color: theme.colorScheme.secondaryContainer,
+        color: const Color.fromRGBO(	124	,124,	229, 1),
       );
   
   static BoxDecoration get fillWhiteA => BoxDecoration(

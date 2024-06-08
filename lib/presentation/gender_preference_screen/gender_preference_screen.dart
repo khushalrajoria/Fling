@@ -112,7 +112,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                   style: theme.textTheme.titleLarge!,
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedButtonIndex == 0 ? Colors.green: null,
+                  backgroundColor: selectedButtonIndex == 0 ? Color.fromRGBO(36, 59, 189, 1): null,
                    minimumSize: Size(360, 69)
                 ),
               ),
@@ -148,7 +148,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 1
-                      ? Colors.green
+                      ? Color.fromRGBO(36, 59, 189, 1)
                       : null,
                       minimumSize: Size(360, 69)
                 ),
@@ -184,7 +184,7 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 2
-                      ? Colors.green
+                      ? Color.fromRGBO(36, 59, 189, 1)
                       : null,
                       minimumSize: Size(360, 69)
                 ),
