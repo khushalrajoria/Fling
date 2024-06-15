@@ -65,7 +65,7 @@ class CustomTextStyles {
       );
   static get bodyLargeTiroDevanagariHindiOnPrimary17 =>
       theme.textTheme.bodyLarge!.tiroDevanagariHindi.copyWith(
-        color: theme.colorScheme.onPrimary,
+        color: Color.fromRGBO(14,17,17, 1),
         fontSize: 17.fSize,
       );
   static get bodyLargeTiroDevanagariHindiPrimary =>

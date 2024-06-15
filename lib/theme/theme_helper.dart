@@ -114,13 +114,13 @@ class TextThemes {
           fontWeight: FontWeight.w400,
         ),
         displaySmall: TextStyle(
-          color: colorScheme.onPrimary,
+          color: Color.fromRGBO(14,17,17, 1),
           fontSize: 36.fSize,
           fontFamily: 'Tiro Devanagari Hindi',
           fontWeight: FontWeight.w400,
         ),
         headlineMedium: TextStyle(
-          color: colorScheme.onPrimary,
+          color: Color.fromRGBO(14,17,17, 1),
           fontSize: 28.fSize,
           fontFamily: 'Inria Sans',
           fontWeight: FontWeight.w400,

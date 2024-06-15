@@ -60,7 +60,7 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
                 children: [
                   Text(
                     "msg_please_enter_your".tr,
-                    style: theme.textTheme.headlineMedium,
+                    style: theme.textTheme.displaySmall,
                   ),
                   SizedBox(height: 23.v),
                   _buildFullName(context),
@@ -193,12 +193,14 @@ class Page1SignUpScreenState extends State<Page1SignUpScreen> {
   Widget _buildNext(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_next".tr,
+       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 31.h,
         right: 32.h,
         bottom: 51.v,
       ),
-      buttonTextStyle: theme.textTheme.titleLarge!,
+      // buttonTextStyle: theme.textTheme.titleMedium!,
       onPressed: () {
         if (_formKey.currentState?.validate() ?? false) {
           if (name != null && dateOfBirth != null && _countryValue != null) {

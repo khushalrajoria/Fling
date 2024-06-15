@@ -44,7 +44,7 @@ final Map<String, String> enUs = {
   "msg_you_must_enter": "!  You must enter one of 2 details to Continue",
   "msg_you_must_enter_one": "You must enter one of 2 details to Continue",
   "lbl_upload_image": "Upload Image",
-  "msg_upload_your_image": "Upload at least 3 Images",
+  "msg_upload_your_image": "Upload upto 3 Images",
   "lbl_i_agree": "I Agree",
   "msg_community_guidelines": "Community Guidelines",
   "msg_when_uploading_photos":

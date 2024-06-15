@@ -131,8 +131,8 @@ class HomePageState extends State<HomePage> {
                                             CustomImageView(
                                               imagePath:
                                                   ImageConstant.imgMoreOptions,
-                                              height: 35.v,
-                                              width: 34.h,
+                                              height: 0.v,
+                                              width: 0.h,
                                             ),
                                             Spacer(),
                                             _buildRowDelete(context),

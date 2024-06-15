@@ -1,14 +1,61 @@
-import '../../../core/app_export.dart';
-import 'friends_item_model.dart'; // ignore_for_file: must_be_immutable
-
-// ignore_for_file: must_be_immutable
 class FriendsListModel {
-  List<FriendsItemModel> friendsItemList = [
-    FriendsItemModel(naziaOne: ImageConstant.img1, naziaTwo: "Nazia"),
-    FriendsItemModel(naziaOne: ImageConstant.img2, naziaTwo: "Khushi"),
-    FriendsItemModel(naziaOne: ImageConstant.img3, naziaTwo: "Samiksha"),
-    FriendsItemModel(naziaOne: ImageConstant.img4, naziaTwo: "Smriti"),
-    FriendsItemModel(naziaOne: ImageConstant.img5, naziaTwo: "Nishtha"),
-    FriendsItemModel(naziaOne: ImageConstant.img6, naziaTwo: "Priya")
-  ];
+  final int userId;
+  final String fullname;
+  final String dateOfBirth;
+  final String country;
+  final String gender;
+  final String mainGender;
+  final String? instaId;
+  final String? snapchatId;
+  final String Pic;
+  final String Pic2;
+  final String Pic3;
+  final String? preferredCountry;
+  final String? preferredGender;
+  final String? prefGender;
+  late  int gemCount;
+  final String email;
+  final int age;
+
+  FriendsListModel({
+    required this.userId,
+    required this.fullname,
+    required this.dateOfBirth,
+    required this.country,
+    required this.gender,
+    required this.mainGender,
+    this.instaId,
+    this.snapchatId,
+    required this.Pic,
+    required this.Pic2,
+    required this.Pic3,
+    this.preferredCountry,
+    this.preferredGender,
+    this.prefGender,
+    required this.gemCount,
+    required this.email,
+    required this.age,
+  });
+
+  factory FriendsListModel.fromJson(Map<String, dynamic> json) {
+    return FriendsListModel(
+      userId: json['userid']?? '',
+      fullname: json['fullname']?? '',
+      dateOfBirth: json['dateofbirth']?? '',
+      country: json['country']?? '',
+      gender: json['gender']?? '',
+      mainGender: json['maingender']?? '',
+      instaId: json['instaid']?? '',
+      snapchatId: json['snapchatid']?? '',
+      Pic: json['imageFile164']?? '',
+      Pic2: json['imagFile264']?? '',
+      Pic3: json['imageFile364']?? '',
+      preferredCountry: json['preferredcountry']?? '',
+      preferredGender: json['preferredgender']?? '',
+      prefGender: json['prefgender']?? '',
+      gemCount: json['gemcount']?? '',
+      email: json['email']?? '',
+      age: json['age']?? '',
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../core/app_export.dart';
+import 'package:open_signup_login_page1_signup/core/app_export.dart';
+import 'package:provider/provider.dart';
 import 'provider/requests_list_provider.dart';
 
 class RequestsListPage extends StatefulWidget {
@@ -10,8 +11,8 @@ class RequestsListPage extends StatefulWidget {
 
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => RequestsListProvider(),
-      child: RequestsListPage(),
+      create: (context) => HomeProvider(),
+      child: const RequestsListPage(),
     );
   }
 }
@@ -22,41 +23,40 @@ class RequestsListPageState extends State<RequestsListPage>
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    super.build(context);
+    final provider = Provider.of<HomeProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         body: Container(
           color: Color.fromRGBO(250, 249, 246, 1),
-          width: SizeUtils.width,
+          width: MediaQuery.of(context).size.width,
           child: SingleChildScrollView(
             child: Column(
               children: [
-                SizedBox(height: 17.v),
+                SizedBox(height: 17),
                 Container(
-                  height: 544.v,
-                  width: 341.h,
-                  margin: EdgeInsets.only(
-                    left: 11.h,
-                    right: 8.h,
-                  ),
+                  height: 544,
+                  width: 341,
+                  margin: EdgeInsets.only(left: 11, right: 8),
                   child: Stack(
                     alignment: Alignment.bottomCenter,
                     children: [
                       Align(
                         alignment: Alignment.center,
-                        
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            if (provider.isLoading)
+                              CircularProgressIndicator()
+                            else if (provider.users.isEmpty)
+                              Text('No requests found')
+                            else
                               _buildRequestsList(context),
-                            ],
-                          ),
+                          ],
                         ),
+                      ),
                     ],
                   ),
                 )
@@ -69,8 +69,8 @@ class RequestsListPageState extends State<RequestsListPage>
   }
 
   Widget _buildRequestsList(BuildContext context) {
-    final requestsListProvider = Provider.of<RequestsListProvider>(context);
-    final requestsList = requestsListProvider.requestsList;
+    final requestsListProvider = Provider.of<HomeProvider>(context);
+    final requestsList = requestsListProvider.users;
 
     return ListView.builder(
       shrinkWrap: true,
@@ -81,46 +81,37 @@ class RequestsListPageState extends State<RequestsListPage>
         return Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.h, vertical: 11.v),
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 11),
               child: InkWell(
-                onTap: (){
-                 NavigatorService.pushNamed(
-              AppRoutes.userProfileScreen,);
+                onTap: () {
+                  Navigator.of(context).pushNamed('/userProfileScreen');
+                  
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    if (item.hasCircle)
-                      Container(
-                        height: 49.v,
-                        width: 49.h,
-                        decoration: BoxDecoration(
-                          color: appTheme.black900,
-                          borderRadius: BorderRadius.circular(24.h),
-                          border: Border.all(
-                            color: appTheme.blue50,
-                            width: 2.h,
-                          ),
-                        ),
-                      ),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(item.Pic),
+                      radius: 24,
+                    ),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.h, vertical: 8.v),
+                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       child: Text(
-                        item.name.tr,
-                        style: theme.textTheme.titleMedium?.copyWith(color: Colors.black),
+                        item.fullname,
+                        style: TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
+                    SizedBox(width: 15),
                     Spacer(),
+                    SizedBox(width: 5),
                     _buildAcceptButton(context),
-                    SizedBox(width: 5.h,),
+                    SizedBox(width: 5),
                     _buildRejectButton(context),
-                  
                   ],
                 ),
               ),
             ),
-            // Divider(),
           ],
         );
       },
@@ -132,30 +123,30 @@ class RequestsListPageState extends State<RequestsListPage>
       onPressed: () {},
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Text('Accept',style: TextStyle(color: Color.fromRGBO(250, 249, 246, 1),fontSize: 14,fontWeight: FontWeight.bold),),
+        child: Text(
+          'Accept',
+          style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+        ),
       ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color?>(appTheme.cyan300)
+      style: ElevatedButton.styleFrom(
+        backgroundColor: appTheme.cyan300,
       ),
     );
   }
 
   Widget _buildRejectButton(BuildContext context) {
-     return ElevatedButton(
+    return ElevatedButton(
       onPressed: () {},
       child: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Text('Reject',style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0),fontSize: 14,fontWeight: FontWeight.bold),),
+        child: Text(
+          'Reject',
+          style: TextStyle(color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+        ),
       ),
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color?>(Color.fromRGBO(250, 249, 246, 1))
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.grey[200],
       ),
-    );
-  }
-
-  onTapTxtPatriciad(BuildContext context) {
-    NavigatorService.pushNamed(
-      AppRoutes.userProfileScreen,
     );
   }
 }

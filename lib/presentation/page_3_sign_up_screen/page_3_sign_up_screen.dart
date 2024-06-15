@@ -1,23 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:open_signup_login_page1_signup/presentation/guidelines_screen/guidelines_screen.dart';
-import '../../config.dart';
 import '../../core/app_export.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../guidelines_screen/provider/guidelines_provider.dart';
-import 'models/page_3_sign_up_model.dart';
 import 'provider/page_3_sign_up_provider.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:http/http.dart' as http;
-
 
 class Page3SignUpScreen extends StatefulWidget {
-  // const Page3SignUpScreen({Key? key})
-  //     : super(
-  //         key: key,
-  //       );
   final String email;
   final String password;
   final String fullName;
@@ -81,7 +71,7 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
               SizedBox(height: 15.v),
               Text(
                 "msg_upload_your_image".tr,
-                style: theme.textTheme.headlineLarge,
+                style: theme.textTheme.displaySmall,
               ),
               SizedBox(height: 74.v),
               _buildMyImageRow(context)
@@ -133,13 +123,13 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
                 builder: (context, value, child) {
                   return value != null
                       ? Image(
-                          image: value!,
+                          image: value,
                           fit: BoxFit.cover, // Adjust as needed
                         )
                       : Icon(
                           Icons.add_a_photo,
                           size: 50.h,
-                          color: Colors.white,
+                          color: Colors.black87,
                       );
                 },
               ),
@@ -168,13 +158,13 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
                 builder: (context, value, child) {
                   return value != null
                       ? Image(
-                          image: value!,
+                          image: value,
                           fit: BoxFit.cover, // Adjust as needed
                         )
                       : Icon(
                           Icons.add_a_photo,
                           size: 50.h,
-                          color: Colors.white,
+                          color: Colors.black87,
                       );
                 },
               ),
@@ -203,13 +193,13 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
                 builder: (context, value, child) {
                   return value != null
                       ? Image(
-                          image: value!,
+                          image: value,
                           fit: BoxFit.cover, // Adjust as needed
                         )
                       : Icon(
                           Icons.add_a_photo,
                           size: 50.h,
-                          color: Colors.white,
+                          color: Colors.black87,
                       );
                 },
               ),
@@ -236,6 +226,8 @@ class Page3SignUpScreenState extends State<Page3SignUpScreen> {
   Widget _buildUploadImageButton(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_upload_image".tr,
+       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 31.h,
         right: 32.h,

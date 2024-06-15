@@ -64,7 +64,7 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
                   children: [
                     Text(
                       "Country Prefrence",
-                      style: theme.textTheme.headlineLarge,
+                      style: theme.textTheme.displaySmall,
                     ),
               SizedBox(height: 10.v),
               Text(
@@ -122,6 +122,8 @@ class _CountryPreferenceScreenState extends State<CountryPreferenceScreen> {
 
    Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
+       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
       text: "Next",
       margin: EdgeInsets.only(
         left: 31.h,

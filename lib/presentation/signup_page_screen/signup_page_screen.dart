@@ -5,7 +5,6 @@ import '../../core/utils/validation_functions.dart';
 import '../../domain/googleauth/google_auth_helper.dart';
 import '../../widgets/custom_checkbox_button.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_outlined_button.dart';
 import '../../widgets/custom_text_form_field.dart';
 import '../page_1_sign_up_screen/page_1_sign_up_screen.dart';
 import '../page_1_sign_up_screen/provider/page_1_sign_up_provider.dart';
@@ -30,7 +29,6 @@ class SignupPageScreen extends StatefulWidget {
 }
 // ignore_for_file: must_be_immutable
 
-// ignore_for_file: must_be_immutable
 class SignupPageScreenState extends State<SignupPageScreen> {
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool agree =false;
@@ -144,8 +142,9 @@ class SignupPageScreenState extends State<SignupPageScreen> {
   /// Section Widget
   Widget _buildRegisterButton(BuildContext context) {
     return CustomElevatedButton(
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(62, 146, 204, 1))),
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
       text: "lbl_register".tr,
+      buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 5.h,
         right: 6.h,
@@ -161,8 +160,9 @@ class SignupPageScreenState extends State<SignupPageScreen> {
   /// Section Widget
   Widget _buildExistingUserLoginButton(BuildContext context) {
     return CustomElevatedButton(
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromRGBO(62, 146, 204, 1))),
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
       text: "msg_existing_user_login".tr,
+       buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 5.h,
         right: 6.h,
@@ -182,6 +182,7 @@ class SignupPageScreenState extends State<SignupPageScreen> {
         builder: (context, continueCheckBox, child) {
           return CustomCheckboxButton(
             text: "msg_by_continuing_i".tr,
+            textStyle: TextStyle(color: Colors.black),
             value: continueCheckBox,
             padding: EdgeInsets.symmetric(vertical: 0.8.v),
             onChange: (value) {

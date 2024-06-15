@@ -128,6 +128,8 @@ class Page2SignUpScreenState extends State<Page2SignUpScreen> {
   Widget _buildNextButton(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_next".tr,
+       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 31.h,
         right: 32.h,

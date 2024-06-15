@@ -1,16 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import '../../../core/app_export.dart';
-import '../models/friends_item_model.dart'; // ignore: must_be_immutable
-// ignore_for_file: must_be_immutable
-
-// ignore_for_file: must_be_immutable
+import 'package:open_signup_login_page1_signup/core/app_export.dart';
+import '../models/friends_list_model.dart';
 class FriendsItemWidget extends StatelessWidget {
-  FriendsItemWidget(this.friendsItemModelObj, {Key? key})
-      : super(
-          key: key,
-        );
+  final FriendsListModel friendsItemModelObj;
 
-  FriendsItemModel friendsItemModelObj;
+  FriendsItemWidget(this.friendsItemModelObj, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +18,12 @@ class FriendsItemWidget extends StatelessWidget {
         children: [
           SizedBox(height: 8.v),
           CustomImageView(
-            imagePath: friendsItemModelObj.naziaOne!,
+            imagePath: friendsItemModelObj.Pic,
             height: 169.v,
             width: 148.h,
           ),
           Text(
-            friendsItemModelObj.naziaTwo!,
+            friendsItemModelObj.fullname,
             style: CustomTextStyles.titleSmallblakeA700,
           )
         ],

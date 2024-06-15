@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
-import '../../core/app_export.dart';
-import 'models/friends_item_model.dart';
+import 'package:open_signup_login_page1_signup/core/utils/size_utils.dart';
+import 'package:provider/provider.dart';
+import '../../theme/app_decoration.dart';
 import 'models/friends_list_model.dart';
 import 'provider/friends_list_provider.dart';
-import 'widgets/friends_item_widget.dart'; // ignore_for_file: must_be_immutable
-
+import 'widgets/friends_item_widget.dart';
 class FriendsListPage extends StatefulWidget {
-  const FriendsListPage({Key? key})
-      : super(
-          key: key,
-        );
+  const FriendsListPage({Key? key}) : super(key: key);
 
   @override
   FriendsListPageState createState() => FriendsListPageState();
+  
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => FriendsListProvider(),
+      create: (context) => HomeProvider(), 
       child: FriendsListPage(),
     );
   }
 }
 
-class FriendsListPageState extends State<FriendsListPage>
-    with AutomaticKeepAliveClientMixin<FriendsListPage> {
+class FriendsListPageState extends State<FriendsListPage> with AutomaticKeepAliveClientMixin<FriendsListPage> {
   @override
   bool get wantKeepAlive => true;
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,15 +40,19 @@ class FriendsListPageState extends State<FriendsListPage>
     );
   }
 
-  /// Section Widget
   Widget _buildFriends(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(
-        left: 18.h,
-        right: 11.h,
-      ),
-      child: Consumer<FriendsListProvider>(
+      padding: EdgeInsets.only(left: 18.h, right: 11.h),
+      child: Consumer<HomeProvider>(
         builder: (context, provider, child) {
+          if (provider.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (provider.users.isEmpty) {
+            return Center(child: Text('No friends found'));
+          }
+
           return GridView.builder(
             shrinkWrap: true,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -65,13 +62,10 @@ class FriendsListPageState extends State<FriendsListPage>
               crossAxisSpacing: 9.h,
             ),
             physics: NeverScrollableScrollPhysics(),
-            itemCount: provider.friendsListModelObj.friendsItemList.length,
+            itemCount: provider.users.length,
             itemBuilder: (context, index) {
-              FriendsItemModel model =
-                  provider.friendsListModelObj.friendsItemList[index];
-              return FriendsItemWidget(
-                model,
-              );
+              FriendsListModel model = provider.users[index];
+              return FriendsItemWidget(model);
             },
           );
         },

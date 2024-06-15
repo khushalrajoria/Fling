@@ -142,8 +142,8 @@ class LoginPageScreenState extends State<LoginPageScreen> {
     return CustomElevatedButton(
       text: "lbl_login".tr,
       margin: EdgeInsets.symmetric(horizontal: 4.h),
-      buttonTextStyle: theme.textTheme.titleLarge!,
-      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color.fromRGBO(62, 146, 204, 1))),
+      buttonTextStyle: theme.textTheme.headlineMedium!,
+      buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
       onPressed: () => loginButton(context),
     );
   }

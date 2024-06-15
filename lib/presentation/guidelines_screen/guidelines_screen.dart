@@ -89,7 +89,9 @@ class GuidelinesScreenState extends State<GuidelinesScreen> {
                 alignment: Alignment.center,
                 child: Text(
                   "msg_community_guidelines".tr,
-                  style: CustomTextStyles.titleLargeBold,
+                  style: TextStyle(color: Colors.white,  fontSize: 24.fSize,
+          fontFamily: 'Inika',
+          fontWeight: FontWeight.w400,),
                 ),
               ),
               SizedBox(height: 26.v),
@@ -103,7 +105,9 @@ class GuidelinesScreenState extends State<GuidelinesScreen> {
                   "msg_when_uploading_photos".tr,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.titleLarge20,
+                  style: TextStyle(color: Colors.white,  fontSize: 18.fSize,
+          fontFamily: 'Inika',
+          fontWeight: FontWeight.w400,),
                 ),
               ),
               SizedBox(height: 33.v),
@@ -114,17 +118,21 @@ class GuidelinesScreenState extends State<GuidelinesScreen> {
                   "msg_your_photos_must".tr,
                   maxLines: 10,
                   overflow: TextOverflow.ellipsis,
-                  style: CustomTextStyles.titleLarge20,
+                  style: TextStyle(color: Colors.white,  fontSize: 18.fSize,
+          fontFamily: 'Inika',
+          fontWeight: FontWeight.w400,),
                 ),
               ),
               SizedBox(height: 23.v),
               CustomElevatedButton(
+                 buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
                 text: "lbl_i_agree".tr,
                 margin: EdgeInsets.only(
                   left: 11.h,
                   right: 28.h,
                 ),
-                buttonStyle: CustomButtonStyles.fillRed,
+                // buttonStyle: CustomButtonStyles.fillRed,
                 onPressed: () {
                  onTapNextButton(context);
                 }

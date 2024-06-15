@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,51 +13,44 @@ extension ImageTypeExtension on String {
       return ImageType.svg;
     } else if (this.startsWith('file://')) {
       return ImageType.file;
+    } else if (RegExp(r'^[A-Za-z0-9+/=]+$').hasMatch(this)) {
+      return ImageType.base64;
     } else {
       return ImageType.png;
     }
   }
 }
 
-enum ImageType { svg, png, network, file, unknown }
+enum ImageType { svg, png, network, file, base64, unknown }
 
-// ignore_for_file: must_be_immutable
 class CustomImageView extends StatelessWidget {
-  CustomImageView(
-      {this.imagePath,
-      this.height,
-      this.width,
-      this.color,
-      this.fit,
-      this.alignment,
-      this.onTap,
-      this.radius,
-      this.margin,
-      this.border,
-      this.placeHolder = 'assets/images/image_not_found.png'});
+  CustomImageView({
+    this.imagePath,
+    this.height,
+    this.width,
+    this.color,
+    this.fit,
+    this.alignment,
+    this.onTap,
+    this.radius,
+    this.margin,
+    this.border,
+    this.placeHolder = 'assets/images/image_not_found.png',
+    this.imageProvider,
+  });
 
-  ///[imagePath] is required parameter for showing image
   String? imagePath;
-
   double? height;
-
   double? width;
-
   Color? color;
-
   BoxFit? fit;
-
   final String placeHolder;
-
   Alignment? alignment;
-
   VoidCallback? onTap;
-
   EdgeInsetsGeometry? margin;
-
   BorderRadius? radius;
-
   BoxBorder? border;
+  MemoryImage? imageProvider;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +69,6 @@ class CustomImageView extends StatelessWidget {
     );
   }
 
-  ///build the image with border radius
   _buildCircleImage() {
     if (radius != null) {
       return ClipRRect(
@@ -87,7 +80,6 @@ class CustomImageView extends StatelessWidget {
     }
   }
 
-  ///build the image with border and border radius style
   _buildImageWithBorder() {
     if (border != null) {
       return Container(
@@ -103,6 +95,16 @@ class CustomImageView extends StatelessWidget {
   }
 
   Widget _buildImageView() {
+    if (imageProvider != null) {
+      return Image(
+        image: imageProvider!,
+        height: height,
+        width: width,
+        fit: fit ?? BoxFit.cover,
+        color: color,
+      );
+    }
+
     if (imagePath != null) {
       switch (imagePath!.imageType) {
         case ImageType.svg:
@@ -149,6 +151,14 @@ class CustomImageView extends StatelessWidget {
               width: width,
               fit: fit ?? BoxFit.cover,
             ),
+          );
+        case ImageType.base64:
+          return Image.memory(
+            base64Decode(imagePath!),
+            height: height,
+            width: width,
+            fit: fit ?? BoxFit.cover,
+            color: color,
           );
         case ImageType.png:
         default:

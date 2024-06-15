@@ -109,10 +109,10 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 },
                 child: Text(
                   "Man",
-                  style: theme.textTheme.titleLarge!,
+                  style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: selectedButtonIndex == 0 ? Color.fromRGBO(36, 59, 189, 1): null,
+                  backgroundColor: selectedButtonIndex == 0 ? Color.fromRGBO(36, 59, 189, 1): appTheme.deepcyanA200,
                    minimumSize: Size(360, 69)
                 ),
               ),
@@ -125,11 +125,11 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   child: Container(
     child: Row(
       children: [
-        Icon(Icons.arrow_drop_down_outlined, color: Colors.white,size: 35,),
+        Icon(Icons.arrow_drop_down_outlined, color: Colors.black87,size: 35,),
         SizedBox(width: 3),
         Text(
           _addMoreButton1Text,
-          style: TextStyle(color: Colors.white, fontSize: 16,fontWeight: FontWeight.w800,),
+          style: TextStyle(color: Colors.black87, fontSize: 16,fontWeight: FontWeight.w800,),
         ),
       ],
     ),
@@ -144,12 +144,12 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 child: Text(
                   "Woman",
                   // style: TextStyle(color: Colors.white,fontSize: 24),
-                  style: theme.textTheme.titleLarge!,
+                  style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 1
                       ? Color.fromRGBO(36, 59, 189, 1)
-                      : null,
+                      : appTheme.deepcyanA200,
                       minimumSize: Size(360, 69)
                 ),
               ),
@@ -162,11 +162,11 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   child: Container(
     child: Row(
       children: [
-         Icon(Icons.arrow_drop_down_outlined, color: Colors.white,size: 35,),
+         Icon(Icons.arrow_drop_down_outlined, color: Colors.black87,size: 35,),
          SizedBox(width: 3,),
         Text(
           _addMoreButton2Text,
-          style: TextStyle(color: Colors.white, fontSize: 16,fontWeight :FontWeight.w800,),
+          style: TextStyle(color: Colors.black87, fontSize: 16,fontWeight :FontWeight.w800,),
         ),
       ],
     ),
@@ -180,12 +180,12 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
                 },
                 child: Text(
                   "Non Binary ",
-                  style: theme.textTheme.titleLarge!,
+                  style: theme.textTheme.titleLarge!.copyWith(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: selectedButtonIndex == 2
                       ? Color.fromRGBO(36, 59, 189, 1)
-                      : null,
+                      : appTheme.deepcyanA200,
                       minimumSize: Size(360, 69)
                 ),
               ),
@@ -199,11 +199,11 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
 
     child: Row(
       children: [
-         Icon(Icons.arrow_drop_down_outlined, color: Colors.white,size: 25,),
+         Icon(Icons.arrow_drop_down_outlined, color: Colors.black87,size: 25,),
          SizedBox(width: 3,),
         Text(
           _addMoreButton3Text,
-          style: TextStyle(color: Colors.white, fontSize: 16,fontWeight :FontWeight.w800,),
+          style: TextStyle(color: Colors.black87, fontSize: 16,fontWeight :FontWeight.w800,),
         ),
       ],
     ),
@@ -371,6 +371,8 @@ String _addMoreButton3Text = 'Add more About your Prefrence';// Track the index 
   Widget _buildSignUp(BuildContext context) {
     return CustomElevatedButton(
       text: "lbl_sign_up".tr,
+       buttonStyle: ButtonStyle(backgroundColor: MaterialStateProperty.all(appTheme.deepcyanA200)),
+      buttonTextStyle: TextStyle(color: Colors.white),
       margin: EdgeInsets.only(
         left: 31.h,
         right: 32.h,
