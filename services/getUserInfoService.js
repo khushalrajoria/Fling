@@ -4,6 +4,7 @@ import moment from "moment-timezone";
 
 class getUserInfoService{
     static async getCompleteInfo(userId){
+        // console.log("Here");
         const user =await db.query("SELECT * FROM data where userid=$1",[userId]);
         const userEmail =await db.query("SELECT email FROM users where userid=$1",[userId]);
         const age=await this.getAge(userId);
@@ -114,7 +115,9 @@ class getUserInfoService{
     }
 
     static async getAge(userId){
+        // console.log("Get me here",userId);
         let userData =await db.query("SELECT dateofbirth FROM data where userid=$1",[userId]);
+        // console.log(userData);
         const istDateOfBirth = moment(userData.rows[0].dateofbirth).tz('Asia/Kolkata').format('YYYY-MM-DD');
         var now = new Date();
         var age = moment().diff(istDateOfBirth, 'years');
