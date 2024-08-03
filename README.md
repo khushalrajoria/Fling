@@ -1,64 +1,81 @@
+# Fling - Your Ultimate Dating App
 
-# Fling
-### Table of contents
-- [System requirements](#system-requirements)
-- [Figma design guidelines for better UI accuracy](#figma-design-guideline-for-better-accuracy)
-- [Check the UI of the entire app](#app-navigations)
-- [Application structure](#project-structure)
-- [How to format your code?](#how-you-can-do-code-formatting)
-- [How you can improve code readability?](#how-you-can-improve-the-readability-of-code)
-- [Libraries and tools used](#libraries-and-tools-used)
+Welcome to Fling, where dating meets customization with unique features for country preferences and detailed gender selections.
+
+## Table of Contents
+- [System Requirements](#system-requirements)
+- [Figma Design Guidelines for Better UI Accuracy](#figma-design-guidelines-for-better-ui-accuracy)
+- [Checking the UI of the Entire App](#checking-the-ui-of-the-entire-app)
+- [Application Structure](#application-structure)
+- [Code Formatting Guidelines](#code-formatting-guidelines)
+- [Improving Code Readability](#improving-code-readability)
+- [Libraries and Tools Used](#libraries-and-tools-used)
 - [Support](#support)
 
-### System requirements
+---
 
-Dart SDK Version 3.3.2 or greater.
-Flutter SDK Version 3.19.4 or greater.
+## System Requirements
 
-### Figma design guidelines for better UI accuracy
+Ensure your development environment meets the following prerequisites:
 
-Read our guidelines to increase the accuracy of design-to-code conversion by optimizing Figma designs.
-https://docs.dhiwise.com/docs/Designguidelines/intro
+- Dart SDK Version 3.3.2 or greater
+- Flutter SDK Version 3.19.4 or greater
 
-### Check the UI of the entire app
+---
 
-Check the UI of all the app screens from a single place by setting up the 'initialRoute'  to AppNavigation in the AppRoutes.dart file.
+## Figma Design Guidelines for Better UI Accuracy
 
-### Application structure
+To ensure accurate design-to-code conversion and a seamless user experience, refer to our design guidelines [here](https://docs.dhiwise.com/docs/Designguidelines/intro).
 
-After successful build, your application structure should look like this:
+---
+
+## Checking the UI of the Entire App
+
+Efficiently navigate through all app screens by setting the 'initialRoute' to 'AppNavigation' in the 'AppRoutes.dart' file.
+
+---
+
+## Application Structure
+
+After a successful build, your application structure should resemble the following:
 
 ```
 .
-├── android                         - It contains files required to run the application on an Android platform.
-├── assets                          - It contains all images and fonts of your application.
-├── ios                             - It contains files required to run the application on an iOS platform.
-├── lib                             - Most important folder in the application, used to write most of the Dart code..
-    ├── main.dart                   - Starting point of the application
-    ├── core
-    │   ├── app_export.dart         - It contains commonly used file imports
-    │   ├── constants               - It contains static constant class file
-    │   └── utils                   - It contains common files and utilities of the application
-    ├── presentation                - It contains widgets of the screens 
-    ├── routes                      - It contains all the routes of the application
-    └── theme                       - It contains app theme and decoration classes
-    └── widgets                     - It contains all custom widget classes
+├── android               - Android platform files
+├── assets                - Images and fonts
+├── ios                   - iOS platform files
+├── lib
+│   ├── main.dart         - Entry point of the application
+│   ├── core
+│   │   ├── app_export.dart   - Common imports
+│   │   ├── constants         - Static constants
+│   │   └── utils             - Utility functions
+│   ├── presentation          - Screen widgets
+│   ├── routes                - Application routes
+│   ├── theme                 - App themes and decorations
+│   └── widgets               - Custom widgets
 ```
 
-### How to format your code?
+---
 
-- if your code is not formatted then run following command in your terminal to format code
-  ```
-  dart format .
-  ```
+## Code Formatting Guidelines
 
-### How you can improve code readability?
+Ensure your code is properly formatted using the following command:
+```bash
+dart format .
+```
 
-Resolve the errors and warnings that are shown in the application.
+---
 
-### Libraries and tools used
+## Improving Code Readability
 
-- Provider - State management
-  https://pub.dev/packages/provider
-- cached_network_image - For storing internet image into cache
-  https://pub.dev/packages/cached_network_image
+Enhance code readability by addressing all errors and warnings within the application.
+
+---
+
+## Libraries and Tools Used
+
+- **Provider** - State management library ([Link](https://pub.dev/packages/provider))
+- **cached_network_image** - Image caching for internet images ([Link](https://pub.dev/packages/cached_network_image))
+
+---
