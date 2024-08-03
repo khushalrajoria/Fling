@@ -1,5 +1,5 @@
 
-# open_signup_login_page1_signup
+# Fling
 ### Table of contents
 - [System requirements](#system-requirements)
 - [Figma design guidelines for better UI accuracy](#figma-design-guideline-for-better-accuracy)
@@ -62,7 +62,3 @@ Resolve the errors and warnings that are shown in the application.
   https://pub.dev/packages/provider
 - cached_network_image - For storing internet image into cache
   https://pub.dev/packages/cached_network_image
-
-### Support
-
-If you have any problems or questions, go to our Discord channel, where we will help you as quickly as possible: https://discord.com/invite/rFMnCG5MZ7
