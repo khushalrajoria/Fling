@@ -12,7 +12,6 @@ Welcome to Fling, where dating meets customization with unique features for coun
 - [Libraries and Tools Used](#libraries-and-tools-used)
 - [Support](#support)
 
----
 
 ## System Requirements
 
@@ -20,14 +19,6 @@ Ensure your development environment meets the following prerequisites:
 
 - Dart SDK Version 3.3.2 or greater
 - Flutter SDK Version 3.19.4 or greater
-
----
-
-## Figma Design Guidelines for Better UI Accuracy
-
-To ensure accurate design-to-code conversion and a seamless user experience, refer to our design guidelines [here](https://docs.dhiwise.com/docs/Designguidelines/intro).
-
----
 
 ## Checking the UI of the Entire App
 
@@ -65,13 +56,10 @@ Ensure your code is properly formatted using the following command:
 dart format .
 ```
 
----
-
 ## Improving Code Readability
 
 Enhance code readability by addressing all errors and warnings within the application.
 
----
 
 ## Libraries and Tools Used
 
